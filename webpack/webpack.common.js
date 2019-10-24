@@ -48,7 +48,7 @@ module.exports = {
         }
       },
       {
-        test: /\.txt$/i,
+        test: /\.(txt|abc)$/i,
         use: 'raw-loader'
       }
     ]
