@@ -1,5 +1,5 @@
 import ABCJS from 'abcjs';
-import { Tune, Vex } from '../../index'; // this isn't index.js, that's why it's still importing tune.
+import { AbcjsVexFlowRenderer, Vex } from '../../index';
 import CustomTunes from '../tunes.txt';
 
 import Tunes1 from '../../node_modules/nottingham-dataset/ABC_cleaned/ashover.abc';
@@ -19,10 +19,9 @@ import Tunes14 from '../../node_modules/nottingham-dataset/ABC_cleaned/xmas.abc'
 
 const allNottinghamTunes = Tunes1 + Tunes2 + Tunes3 + Tunes4 + Tunes5 + Tunes6 + Tunes7 + Tunes8 + Tunes9 + Tunes10 + Tunes11 + Tunes12 + Tunes13 + Tunes14;
 
-const tuneSelect = document.getElementById('tuneSelect');
-const tunebookSelect = document.getElementById('tunebookSelect');
+const tuneSelect = document.getElementById('tuneSelect'); // select
+const tunebookSelect = document.getElementById('tunebookSelect'); // select
 const vexflowRendered = document.getElementById('vexflowRendered'); // div
-// const abcjsRendered = document.getElementById('abcjsRendered'); // div
 const abcText = document.getElementById('abcText'); // p
 
 // ADD RENDER OPTIONS CONTROLS INCLUDING THESE AND OTHERSE
@@ -48,10 +47,7 @@ nottinghamTunesArray.sort((a, b) => {
     }
   });
 
-  if (aTitle > bTitle) {
-    return true;
-  }
-  return false;
+  return (aTitle > bTitle);
 });
 
 // load the tunes.txt tunes into the select...
@@ -134,8 +130,8 @@ tuneSelect.onchange = (event) => {
   context.svg.setAttribute('preserveAspectRatio', 'xMinYMin meet');
 
   try {
-    const tune = new Tune(event.target.value, renderOptions);
-    tune.drawToContext(context);
+    const abcjsVexFlowRenderer = new AbcjsVexFlowRenderer(event.target.value, renderOptions);
+    abcjsVexFlowRenderer.drawToContext(context);
   } catch (err) {
     vexflowRendered.innerText = err;
   }

@@ -22,7 +22,7 @@ class FakeStaveNote {
    * @param   {number} duration duration such as '8'
    * @param   {number} dots // actually what is this?
    * @param   {array} keys such as ['f/5']
-   * @param   {bool} stem_direction
+   * @param   {number} 'alternate_stems' to alternate, otherwise numeric -1 or 1 (the values VexFlow actually uses)
    *
    * @returns {Array} the array of fake StaveNotes
 */
@@ -30,11 +30,10 @@ function FakeStaveNoteArrayFactory(howMany, duration, dots, keys, stemDirection)
   const notesArray = [];
 
   for (let i = 0; i < howMany; i += 1) {
-    const direction = stemDirection == 'alternate_stems' ? i % 2 ? -1 : 1 : stemDirection;
+    const alternatingDirection = i % 2 ? -1 : 1;
+    const direction = stemDirection === 'alternate_stems' ? alternatingDirection : stemDirection;
     const note = new FakeStaveNote(duration, dots, keys, direction);
     notesArray.push(note);
-    console.log("pushed note: " );
-    console.log(note);
   }
 
   return notesArray;

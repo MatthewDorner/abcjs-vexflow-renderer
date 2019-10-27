@@ -3,7 +3,7 @@
 
 ```
 import ABCJS from 'abcjs';
-import { Tune, Vex } from 'abcjs-vexflow-renderer';
+import { AbcjsVexFlowRenderer, Vex } from 'abcjs-vexflow-renderer';
 import abcText from './abc_tune.txt';
 
 const whereToRender = document.getElementById('musicDiv');
@@ -31,7 +31,7 @@ const renderOptions = {
 };
 
 // process the parsed object
-const tune = new Tune(parsedObject, renderOptions);
+const abcjsVexFlowRenderer = new AbcjsVexFlowRenderer(parsedObject, renderOptions);
 
 // draw to the vexflow context
 tune.drawToContext(context);

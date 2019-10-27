@@ -1,4 +1,4 @@
 import Vex from 'vexflow';
-import Tune from './lib/tune';
+import AbcjsVexFlowRenderer from './lib/abcjs-vexflow-renderer';
 
-export { Tune, Vex };
+export { AbcjsVexFlowRenderer, Vex };
