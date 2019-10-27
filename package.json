@@ -6,7 +6,8 @@
   "scripts": {
     "build": "NODE_ENV=production webpack --config webpack/webpack.config.prod.js  --colors",
     "start": "webpack-dev-server --open --config webpack/webpack.config.dev.js",
-    "lint": "eslint '**/*.js' --fix"
+    "lint": "eslint '**/*.js' --fix",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -25,22 +26,23 @@
   "homepage": "https://github.com/MatthewDorner/abcjs-vexflow-renderer#readme",
   "devDependencies": {
     "@babel/core": "^7.6.4",
-    "@babel/runtime": "^7.4.5",
     "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/plugin-transform-modules-commonjs": "^7.6.0",
     "@babel/preset-env": "^7.6.3",
+    "@babel/runtime": "^7.4.5",
     "babel-eslint": "^10.0.3",
     "babel-loader": "^8.0.6",
     "babel-plugin-inline-import": "^3.0.0",
     "eslint": "^6.5.1",
     "eslint-config-airbnb": "^17.1.0",
-    "eslint-plugin-import": "^2.17.3",
     "eslint-loader": "^3.0.2",
+    "eslint-plugin-import": "^2.17.3",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.16.0",
     "file-loader": "^4.2.0",
     "mini-css-extract-plugin": "^0.8.0",
-    "nottingham-dataset": "git+https://github.com/MatthewDorner/nottingham-dataset.git",
+    "nottingham-dataset": "git+https://github.com/MatthewDorner/nottingham-dataset.git#2203e8",
     "raw-loader": "^3.1.0",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.9",
@@ -49,11 +51,11 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.6.0",
+    "abcjs": "^5.9.1",
     "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^5.0.4",
-    "html-webpack-plugin": "^4.0.0-beta.8",
     "core-js": "^3.3.2",
-    "abcjs": "^5.9.1",
+    "html-webpack-plugin": "^4.0.0-beta.8",
     "vexflow": "^1.2.89"
   }
 }
