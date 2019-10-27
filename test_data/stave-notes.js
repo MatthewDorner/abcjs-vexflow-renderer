@@ -1,10 +1,10 @@
 
 class FakeStaveNote {
-  constructor(duration, dots, keys, stem_direction) {
+  constructor(duration, dots, keys, stemDirection) {
     this.duration = duration;
     this.dots = dots;
     this.keys = keys;
-    this.stem_direction = stem_direction;
+    this.stem_direction = stemDirection;
   }
 
   getStemDirection() {
@@ -26,11 +26,11 @@ class FakeStaveNote {
    *
    * @returns {Array} the array of fake StaveNotes
 */
-function FakeStaveNoteArrayFactory (howMany, duration, dots, keys, stem_direction) {
+function FakeStaveNoteArrayFactory(howMany, duration, dots, keys, stemDirection) {
   const notesArray = [];
 
   for (let i = 0; i < howMany; i += 1) {
-    let direction = stem_direction == 'alternate_stems' ? i % 2 ? -1 : 1 : stem_direction;
+    const direction = stemDirection == 'alternate_stems' ? i % 2 ? -1 : 1 : stemDirection;
     const note = new FakeStaveNote(duration, dots, keys, direction);
     notesArray.push(note);
     console.log("pushed note: " );

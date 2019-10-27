@@ -15,7 +15,7 @@ const BFlatMajor = {
   accidentals: [
     {
       acc: 'flat',
-      note: 'B'
+      note: 'B' // 'B' is actually how it comes from the abcjs parser
     },
     {
       acc: 'flat',
