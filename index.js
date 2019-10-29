@@ -1,4 +1,10 @@
 import Vex from 'vexflow';
-import AbcjsVexFlowRenderer from './lib/abcjs-vexflow-renderer';
+import getTune from './lib/get-tune';
+import drawToContext from './lib/draw-to-context';
+
+const AbcjsVexFlowRenderer = {
+  getTune,
+  drawToContext
+};
 
 export { AbcjsVexFlowRenderer, Vex };

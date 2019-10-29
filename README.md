@@ -2,14 +2,10 @@
 ### VexFlow renderer for abcjs. Usage:
 
 ```
-import ABCJS from 'abcjs';
 import { AbcjsVexFlowRenderer, Vex } from 'abcjs-vexflow-renderer';
 import abcText from './abc_tune.txt';
 
 const whereToRender = document.getElementById('musicDiv');
-
-// get the parsed repesentation from abcjs
-const parsedObject = ABCJS.parseOnly(abcText);
 
 // generate a VexFlow renderer & context
 const renderer = new Vex.Flow.Renderer(whereToRender, Vex.Flow.Renderer.Backends.SVG);
@@ -31,10 +27,10 @@ const renderOptions = {
 };
 
 // process the parsed object
-const abcjsVexFlowRenderer = new AbcjsVexFlowRenderer(parsedObject, renderOptions);
+const tune = AbcjsVexFlowRenderer.getTune(abcText, renderOptions);
 
 // draw to the vexflow context
-tune.drawToContext(context);
+AbcjsVexFlowRenderer.drawToContext(context, tune);
 ```
 
 #### Testing

@@ -130,8 +130,8 @@ tuneSelect.onchange = (event) => {
   context.svg.setAttribute('preserveAspectRatio', 'xMinYMin meet');
 
   try {
-    const abcjsVexFlowRenderer = new AbcjsVexFlowRenderer(event.target.value, renderOptions);
-    abcjsVexFlowRenderer.drawToContext(context);
+    const tune = AbcjsVexFlowRenderer.getTune(event.target.value, renderOptions);
+    AbcjsVexFlowRenderer.drawToContext(context, tune);
   } catch (err) {
     vexflowRendered.innerText = err;
   }
