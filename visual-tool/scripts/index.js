@@ -1,7 +1,7 @@
 import ABCJS from 'abcjs';
 import { AbcjsVexFlowRenderer, Vex } from '../../index';
-import CustomTunes from '../tunes.txt';
 
+import CustomTunes from '../tunes.txt';
 import Tunes1 from '../../node_modules/nottingham-dataset/ABC_cleaned/ashover.abc';
 import Tunes2 from '../../node_modules/nottingham-dataset/ABC_cleaned/hpps.abc';
 import Tunes3 from '../../node_modules/nottingham-dataset/ABC_cleaned/jigs.abc';
@@ -17,12 +17,76 @@ import Tunes12 from '../../node_modules/nottingham-dataset/ABC_cleaned/slip.abc'
 import Tunes13 from '../../node_modules/nottingham-dataset/ABC_cleaned/waltzes.abc';
 import Tunes14 from '../../node_modules/nottingham-dataset/ABC_cleaned/xmas.abc';
 
+import '../index.css';
+
 const allNottinghamTunes = Tunes1 + Tunes2 + Tunes3 + Tunes4 + Tunes5 + Tunes6 + Tunes7 + Tunes8 + Tunes9 + Tunes10 + Tunes11 + Tunes12 + Tunes13 + Tunes14;
+
+const defaultRenderOptions = {
+  xOffset: 3,
+  widthFactor: 27,
+  lineHeight: 180,
+  clefWidth: 40,
+  meterWidth: 40,
+  repeatWidthModifier: 35,
+  dottedNotesModifier: 23,
+  keySigAccidentalWidth: 20,
+  minWidthMultiplier: 2,
+  renderWidth: 800
+};
+
+let renderOptions = Object.assign({}, defaultRenderOptions);
 
 const tuneSelect = document.getElementById('tuneSelect'); // select
 const tunebookSelect = document.getElementById('tunebookSelect'); // select
 const vexflowRendered = document.getElementById('vexflowRendered'); // div
 const abcText = document.getElementById('abcText'); // p
+
+// could just add these to an array, but it makes it easier to... refer to them this way...
+const xOffset = document.getElementById('xOffset');
+const widthFactor = document.getElementById('widthFactor');
+const lineHeight = document.getElementById('lineHeight');
+const clefWidth = document.getElementById('clefWidth');
+const meterWidth = document.getElementById('meterWidth');
+const repeatWidthModifier = document.getElementById('repeatWidthModifier');
+const dottedNotesModifier = document.getElementById('dottedNotesModifier');
+const keySigAccidentalWidth = document.getElementById('keySigAccidentalWidth');
+const minWidthMultiplier = document.getElementById('minWidthMultiplier');
+const renderWidth = document.getElementById('renderWidth');
+
+const applyDefaultOptions = document.getElementById('applyDefaultOptions');
+
+const renderOptionsControls = [
+  xOffset,
+  widthFactor,
+  lineHeight,
+  clefWidth,
+  meterWidth,
+  repeatWidthModifier,
+  dottedNotesModifier,
+  keySigAccidentalWidth,
+  minWidthMultiplier,
+  renderWidth
+];
+
+renderOptionsControls.forEach((control) => {
+  control.onchange = (e) => {
+    renderOptions[e.target.id] = parseFloat(e.target.value);
+    renderTunes();
+  };
+  control.value = defaultRenderOptions[control.id];
+});
+
+applyDefaultOptions.onclick = (e) => {
+  renderOptionsControls.forEach((control) => {
+    control.value = defaultRenderOptions[control.id];
+  });
+  setDefaultRenderOptions();
+  renderTunes();
+};
+
+function setDefaultRenderOptions() {
+  renderOptions = Object.assign({}, defaultRenderOptions);
+}
 
 // ADD RENDER OPTIONS CONTROLS INCLUDING THESE AND OTHERSE
 const vexRendererWidth = 500;
@@ -30,6 +94,8 @@ const vexRendererHeight = 1000;
 
 const customOptions = [];
 const nottinghamOptions = [];
+
+setDefaultRenderOptions();
 
 // alphabetize nottingham Tunes
 const nottinghamTunesArray = allNottinghamTunes.split('\nX:');
@@ -99,9 +165,32 @@ tunebookSelect.onchange = (event) => {
 tuneSelect.onchange = (event) => {
   // set abcText
   abcText.innerText = event.target.value;
+  renderTunes();
 
   // render abcjs
-  ABCJS.renderAbc('abcjsRendered', event.target.value);
+  // ABCJS.renderAbc('abcjsRendered', event.target.value);
+  // while (vexflowRendered.firstChild) {
+  //   vexflowRendered.removeChild(vexflowRendered.firstChild);
+  // }
+
+  // // render abcjs-vexflow-renderer
+  // const renderer = new Vex.Flow.Renderer(vexflowRendered, Vex.Flow.Renderer.Backends.SVG);
+  // renderer.resize(vexRendererWidth, vexRendererHeight);
+  // const context = renderer.getContext();
+
+  // context.setViewBox(0, 0, renderOptions.renderWidth + 5, renderOptions.renderWidth + 5);
+  // context.svg.setAttribute('preserveAspectRatio', 'xMinYMin meet');
+
+  // try {
+  //   const tune = AbcjsVexFlowRenderer.getTune(event.target.value, renderOptions);
+  //   AbcjsVexFlowRenderer.drawToContext(context, tune);
+  // } catch (err) {
+  //   vexflowRendered.innerText = err;
+  // }
+};
+
+function renderTunes() {
+  ABCJS.renderAbc('abcjsRendered', abcText.innerText);
   while (vexflowRendered.firstChild) {
     vexflowRendered.removeChild(vexflowRendered.firstChild);
   }
@@ -111,28 +200,17 @@ tuneSelect.onchange = (event) => {
   renderer.resize(vexRendererWidth, vexRendererHeight);
   const context = renderer.getContext();
 
-  const renderOptions = {
-    xOffset: 3,
-    widthFactor: 27,
-    lineHeight: 180,
-    clefWidth: 40,
-    meterWidth: 40,
-    repeatWidthModifier: 35, // can't figure out why this is necessary but...
-    // putting this to 2 makes it look better for the second part's lead-in, but makes it look worse
-    // for the lead-in notes in the very first bar........
-    dottedNotesModifier: 23,
-    keySigAccidentalWidth: 20, // used to be 14 or 16...
-    minWidthMultiplier: 2, // minimum bar width should be that of a bar with 2 notes
-    renderWidth: 800
-  };
-
   context.setViewBox(0, 0, renderOptions.renderWidth + 5, renderOptions.renderWidth + 5);
   context.svg.setAttribute('preserveAspectRatio', 'xMinYMin meet');
 
+  console.log('caLLING WITH THESE OPTIONS');
+  console.log(renderOptions);
+
   try {
-    const tune = AbcjsVexFlowRenderer.getTune(event.target.value, renderOptions);
+    const tune = AbcjsVexFlowRenderer.getTune(abcText.innerText, renderOptions);
     AbcjsVexFlowRenderer.drawToContext(context, tune);
   } catch (err) {
     vexflowRendered.innerText = err;
+    throw err;
   }
-};
+}

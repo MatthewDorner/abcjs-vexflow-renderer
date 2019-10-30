@@ -1,0 +1,47 @@
+#abcTextContainer {
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+#abcText {
+  font-size: 11px;
+}
+
+#renderOptionsForm {
+  text-align: right;
+  font-size: 15px;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+#flex-wrapper {
+  display: flex;
+  border-top: 5px solid black;
+  padding-top: 15px;
+}
+
+#outputs {
+  display: flex;
+  margin-top: 15px;
+  border-top: 5px solid black;
+}
+
+#vexflowOutput {
+  width: 100%;
+}
+
+#abcjsOutput {
+  width: 100%;
+}
+
+#vexflowRendered {
+  width: 100%;
+}
+
+#abcjsRendered {
+  width: 100%;
+}
+
+input[type="text"]{
+  font-size: 12px;
+}

@@ -21,7 +21,7 @@ module.exports = merge(common, {
     rules: [
       {
         test: /\.js$/,
-        include: Path.resolve(__dirname, '../src'),
+        include: Path.resolve(__dirname, '../visual-tool'),
         enforce: 'pre',
         loader: 'eslint-loader',
         options: {
@@ -30,7 +30,7 @@ module.exports = merge(common, {
       },
       {
         test: /\.js$/,
-        include: Path.resolve(__dirname, '../src'),
+        include: Path.resolve(__dirname, '../visual-tool'),
         loader: 'babel-loader'
       },
       {

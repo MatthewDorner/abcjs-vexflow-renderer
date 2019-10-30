@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>abcjs-vexflow-renderer visual comparison tool</title>
+  <!-- <link href="index.css" rel="stylesheet"> -->
+</head>
+<body>
+  <div id="header">
+
+    <h2>abcjs-vexflow-renderer visual comparison tool</h2>
+    <p>Compare abcjs-vexflow-renderer output to abcjs built-in renderer output.</p>
+  </div>
+  <div id="flex-wrapper">
+
+    <div id="selectWrapper" style="display:flex;flex-direction:column;">
+      <select id="tunebookSelect" multiple=11" style="width:300px;height:95px">
+        <option value="nottingham">Nottingham Dataset</option>
+        <option value="custom">Custom file at visual-tool/tunes.txt</option>
+      </select>
+      <select id="tuneSelect" multiple="1" style="width:300px;height:230px;">
+      </select>
+    </div>
+      
+    <div style="text-align:right;">
+      <form id="renderOptionsForm">
+        xOffset: <input type="text" id="xOffset"><br>
+        widthFactor: <input type="text" id="widthFactor"><br>
+        lineHeight: <input type="text" id="lineHeight"><br>
+        clefWidth: <input type="text" id="clefWidth"><br>
+        meterWidth: <input type="text" id="meterWidth"><br>
+        repeatWidthModifier: <input type="text" id="repeatWidthModifier"><br>
+        dottedNotesModifier: <input type="text" id="dottedNotesModifier"><br>
+        keySigAccidentalWidth: <input type="text" id="keySigAccidentalWidth"><br>
+        minWidthMultiplier: <input type="text" id="minWidthMultiplier"><br>
+        renderWidth: <input type="text" id="renderWidth"><br>
+      </form> 
+      <button id="applyDefaultOptions" style="margin-right:15px;width:90%;">Apply Default Options</button>
+    </div>
+  
+    <div id="abcTextContainer">
+      <p id="abcText">
+      </p>
+    </div>
+  
+  </div>
+
+  <div id="outputs">
+    <div id="vexflowOutput">
+      <h3>abcjs-vexflow-renderer rendered: </h3>
+      <div id="vexflowRendered">
+      </div>
+    </div>
+  
+    <div id="abcjsOutput">
+      <h3>abcjs rendered: </h3>
+      <div id="abcjsRendered">
+      </div>
+    </div>
+  </div>  
+</body>
+</html>
