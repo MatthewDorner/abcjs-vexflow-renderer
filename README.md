@@ -34,7 +34,6 @@ AbcjsVexFlowRenderer.drawToContext(context, tune);
 ```
 
 #### Testing and Development
-Setup:
 
 `git clone https://github.com/MatthewDorner/abcjs-vexflow-renderer`
 
