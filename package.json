@@ -55,7 +55,7 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.6.0",
-    "abcjs": "^5.9.1",
+    "abcjs": "git+https://github.com/MatthewDorner/abcjs.git",
     "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^5.0.4",
     "core-js": "^3.3.2",
