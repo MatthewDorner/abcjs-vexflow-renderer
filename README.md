@@ -23,6 +23,7 @@ const renderOptions = {
 	dottedNotesModifier: 23,
 	keySigAccidentalWidth: 20,
 	minWidthMultiplier: 2,
+  voltaHeight: 15,
 	renderWidth: 800 // higher value to make music smaller
 };
 
