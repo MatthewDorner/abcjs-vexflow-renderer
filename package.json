@@ -44,7 +44,7 @@
     "file-loader": "^4.2.0",
     "mini-css-extract-plugin": "^0.8.0",
     "node-sass": "^4.13.0",
-    "nottingham-dataset": "git+https://github.com/MatthewDorner/nottingham-dataset.git#2203e8",
+    "nottingham-dataset": "git+https://github.com/MatthewDorner/nottingham-dataset.git#fbfd074",
     "raw-loader": "^3.1.0",
     "sass-loader": "^8.0.0",
     "style-loader": "^1.0.0",
@@ -59,6 +59,7 @@
     "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^5.0.4",
     "core-js": "^3.3.2",
+    "deep-freeze": "0.0.1",
     "html-webpack-plugin": "^4.0.0-beta.8",
     "vexflow": "^1.2.89"
   }
