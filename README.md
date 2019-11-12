@@ -14,7 +14,7 @@ const context = renderer.getContext();
 
 // set up rendering options
 const renderOptions = {
-	xOffset: 3,
+	xOffset: 3, // like left margin
 	widthFactor: 27, // note density
 	lineHeight: 180,
 	clefWidth: 40,
@@ -22,7 +22,8 @@ const renderOptions = {
 	repeatWidthModifier: 35,
 	dottedNotesModifier: 23,
 	keySigAccidentalWidth: 20,
-	minWidthMultiplier: 2,
+	minWidthMultiplier: 2, // smallest width of a bar
+  tabsVisibility: 1, // bool
   voltaHeight: 15,
 	renderWidth: 800 // higher value to make music smaller
 };

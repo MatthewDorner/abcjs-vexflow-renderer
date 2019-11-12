@@ -31,6 +31,7 @@ const defaultRenderOptions = {
   dottedNotesModifier: 23,
   keySigAccidentalWidth: 20,
   minWidthMultiplier: 2,
+  tabsVisibility: 1,
   voltaHeight: 15,
   renderWidth: 800
 };
@@ -52,6 +53,7 @@ const repeatWidthModifier = document.getElementById('repeatWidthModifier');
 const dottedNotesModifier = document.getElementById('dottedNotesModifier');
 const keySigAccidentalWidth = document.getElementById('keySigAccidentalWidth');
 const minWidthMultiplier = document.getElementById('minWidthMultiplier');
+const tabsVisibility = document.getElementById('tabsVisibility');
 const voltaHeight = document.getElementById('voltaHeight');
 const renderWidth = document.getElementById('renderWidth');
 
@@ -67,6 +69,7 @@ const renderOptionsControls = [
   dottedNotesModifier,
   keySigAccidentalWidth,
   minWidthMultiplier,
+  tabsVisibility,
   voltaHeight,
   renderWidth
 ];
