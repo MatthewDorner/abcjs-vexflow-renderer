@@ -35,6 +35,8 @@
     "babel-loader": "^8.0.6",
     "babel-plugin-inline-import": "^3.0.0",
     "css-loader": "^3.2.0",
+    "deep-freeze": "0.0.1",
+    "deepmerge": "^4.2.2",
     "eslint": "^6.5.1",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-loader": "^3.0.2",
@@ -59,7 +61,6 @@
     "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^5.0.4",
     "core-js": "^3.3.2",
-    "deep-freeze": "0.0.1",
     "html-webpack-plugin": "^4.0.0-beta.8",
     "vexflow": "^1.2.89"
   }
