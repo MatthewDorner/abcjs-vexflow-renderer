@@ -23,17 +23,16 @@ const allNottinghamTunes = Tunes1 + Tunes2 + Tunes3 + Tunes4 + Tunes5 + Tunes6 +
 
 const defaultRenderOptions = {
   xOffset: 3,
-  widthFactor: 27,
-  lineHeight: 180,
-  clefWidth: 40,
-  meterWidth: 40,
+  widthFactor: 1.7,
+  lineHeight: 170,
+  clefWidth: 45,
+  meterWidth: 30,
   repeatWidthModifier: 35,
-  dottedNotesModifier: 23,
-  keySigAccidentalWidth: 20,
-  minWidthMultiplier: 2,
+  keySigAccidentalWidth: 15,
   tabsVisibility: 1,
-  voltaHeight: 15,
-  renderWidth: 800
+  voltaHeight: 25,
+  minNotesWidth: 35,
+  renderWidth: 500
 };
 
 let renderOptions = Object.assign({}, defaultRenderOptions);
@@ -50,11 +49,10 @@ const lineHeight = document.getElementById('lineHeight');
 const clefWidth = document.getElementById('clefWidth');
 const meterWidth = document.getElementById('meterWidth');
 const repeatWidthModifier = document.getElementById('repeatWidthModifier');
-const dottedNotesModifier = document.getElementById('dottedNotesModifier');
 const keySigAccidentalWidth = document.getElementById('keySigAccidentalWidth');
-const minWidthMultiplier = document.getElementById('minWidthMultiplier');
 const tabsVisibility = document.getElementById('tabsVisibility');
 const voltaHeight = document.getElementById('voltaHeight');
+const minNotesWidth = document.getElementById('minNotesWidth');
 const renderWidth = document.getElementById('renderWidth');
 
 const applyDefaultOptions = document.getElementById('applyDefaultOptions');
@@ -66,11 +64,10 @@ const renderOptionsControls = [
   clefWidth,
   meterWidth,
   repeatWidthModifier,
-  dottedNotesModifier,
   keySigAccidentalWidth,
-  minWidthMultiplier,
   tabsVisibility,
   voltaHeight,
+  minNotesWidth,
   renderWidth
 ];
 
