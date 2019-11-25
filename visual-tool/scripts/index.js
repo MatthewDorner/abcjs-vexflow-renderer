@@ -56,6 +56,7 @@ const minNotesWidth = document.getElementById('minNotesWidth');
 const renderWidth = document.getElementById('renderWidth');
 
 const applyDefaultOptions = document.getElementById('applyDefaultOptions');
+const testForErrors = document.getElementById('testForErrors');
 
 const renderOptionsControls = [
   xOffset,
@@ -74,22 +75,11 @@ const renderOptionsControls = [
 renderOptionsControls.forEach((control) => {
   control.onchange = (e) => {
     renderOptions[e.target.id] = parseFloat(e.target.value);
-    renderTunes();
+    renderTune(abcText.innerText);
   };
   control.value = defaultRenderOptions[control.id];
 });
 
-applyDefaultOptions.onclick = (e) => {
-  renderOptionsControls.forEach((control) => {
-    control.value = defaultRenderOptions[control.id];
-  });
-  setDefaultRenderOptions();
-  renderTunes();
-};
-
-function setDefaultRenderOptions() {
-  renderOptions = Object.assign({}, defaultRenderOptions);
-}
 
 // ADD RENDER OPTIONS CONTROLS INCLUDING THESE AND OTHERSE
 const vexRendererWidth = 500;
@@ -101,7 +91,18 @@ const nottinghamOptions = [];
 setDefaultRenderOptions();
 
 // alphabetize nottingham Tunes
-const nottinghamTunesArray = allNottinghamTunes.split('\nX:');
+const nottinghamTunesArray = allNottinghamTunes.split('\nX:').filter((tune) => {
+  if (tune) {
+    return true;
+  }
+  return false;
+}).map((tune) => {
+  if (!tune.startsWith('X:')) {
+    return `X:${tune}`;
+  }
+  return tune;
+});
+
 nottinghamTunesArray.sort((a, b) => {
   let aTitle = '';
   let bTitle = '';
@@ -120,7 +121,35 @@ nottinghamTunesArray.sort((a, b) => {
 });
 
 // load the tunes.txt tunes into the select...
-const customTunesArray = CustomTunes.split('\nX:');
+const customTunesArray = CustomTunes.split('\nX:').filter((tune) => {
+  if (tune) {
+    return true;
+  }
+  return false;
+}).map((tune) => {
+  if (!tune.startsWith('X:')) {
+    return `X:${tune}`;
+  }
+  return tune;
+});
+
+customTunesArray.sort((a, b) => {
+  let aTitle = '';
+  let bTitle = '';
+  a.split('\n').forEach((line) => {
+    if (line.startsWith('T:')) {
+      aTitle = line.slice(2, line.length);
+    }
+  });
+  b.split('\n').forEach((line) => {
+    if (line.startsWith('T:')) {
+      bTitle = line.slice(2, line.length);
+    }
+  });
+
+  return (aTitle > bTitle);
+});
+
 customTunesArray.forEach((tune) => {
   let title = '';
   tune.split('\n').forEach((line) => {
@@ -148,6 +177,32 @@ nottinghamTunesArray.forEach((tune) => {
   nottinghamOptions.push(option);
 });
 
+applyDefaultOptions.onclick = (e) => {
+  renderOptionsControls.forEach((control) => {
+    control.value = defaultRenderOptions[control.id];
+  });
+  setDefaultRenderOptions();
+  renderTune(abcText.innerText);
+};
+
+testForErrors.onclick = () => {
+  let exceptionsText = '';
+  tuneSelect.childNodes.forEach((option) => {
+    setTimeout(() => {
+      try {
+        renderTune(option.value);
+      } catch (err) {
+        exceptionsText += `${option.value}FAILED WITH: ${err}\n\n\n`;
+        abcText.innerText = exceptionsText;
+      }
+    }, 1);
+  });
+};
+
+function setDefaultRenderOptions() {
+  renderOptions = Object.assign({}, defaultRenderOptions);
+}
+
 tunebookSelect.onchange = (event) => {
   while (tuneSelect.firstChild) {
     tuneSelect.removeChild(tuneSelect.firstChild);
@@ -168,32 +223,11 @@ tunebookSelect.onchange = (event) => {
 tuneSelect.onchange = (event) => {
   // set abcText
   abcText.innerText = event.target.value;
-  renderTunes();
-
-  // render abcjs
-  // ABCJS.renderAbc('abcjsRendered', event.target.value);
-  // while (vexflowRendered.firstChild) {
-  //   vexflowRendered.removeChild(vexflowRendered.firstChild);
-  // }
-
-  // // render abcjs-vexflow-renderer
-  // const renderer = new Vex.Flow.Renderer(vexflowRendered, Vex.Flow.Renderer.Backends.SVG);
-  // renderer.resize(vexRendererWidth, vexRendererHeight);
-  // const context = renderer.getContext();
-
-  // context.setViewBox(0, 0, renderOptions.renderWidth + 5, renderOptions.renderWidth + 5);
-  // context.svg.setAttribute('preserveAspectRatio', 'xMinYMin meet');
-
-  // try {
-  //   const tune = AbcjsVexFlowRenderer.getTune(event.target.value, renderOptions);
-  //   AbcjsVexFlowRenderer.drawToContext(context, tune);
-  // } catch (err) {
-  //   vexflowRendered.innerText = err;
-  // }
+  renderTune(abcText.innerText);
 };
 
-function renderTunes() {
-  ABCJS.renderAbc('abcjsRendered', abcText.innerText);
+function renderTune(abc) {
+  ABCJS.renderAbc('abcjsRendered', abc);
   while (vexflowRendered.firstChild) {
     vexflowRendered.removeChild(vexflowRendered.firstChild);
   }
@@ -206,11 +240,8 @@ function renderTunes() {
   context.setViewBox(0, 0, renderOptions.renderWidth + 5, renderOptions.renderWidth + 5);
   context.svg.setAttribute('preserveAspectRatio', 'xMinYMin meet');
 
-  console.log('caLLING WITH THESE OPTIONS');
-  console.log(renderOptions);
-
   try {
-    const tune = AbcjsVexFlowRenderer.getTune(abcText.innerText, renderOptions);
+    const tune = AbcjsVexFlowRenderer.getTune(abc, renderOptions);
     AbcjsVexFlowRenderer.drawToContext(context, tune);
   } catch (err) {
     vexflowRendered.innerText = err;
