@@ -31,7 +31,7 @@ const defaultRenderOptions = {
   keySigAccidentalWidth: 15,
   tabsVisibility: 1,
   voltaHeight: 25,
-  minNotesWidth: 35,
+  minNotesWidth: 40,
   renderWidth: 500
 };
 
