@@ -41,6 +41,7 @@ const tuneSelect = document.getElementById('tuneSelect'); // select
 const tunebookSelect = document.getElementById('tunebookSelect'); // select
 const vexflowRendered = document.getElementById('vexflowRendered'); // div
 const abcText = document.getElementById('abcText'); // p
+const errorText = document.getElementById('errorText'); // p
 
 // could just add these to an array, but it makes it easier to... refer to them this way...
 const xOffset = document.getElementById('xOffset');
@@ -187,13 +188,14 @@ applyDefaultOptions.onclick = (e) => {
 
 testForErrors.onclick = () => {
   let exceptionsText = '';
-  tuneSelect.childNodes.forEach((option) => {
+  tuneSelect.childNodes.forEach((option, i) => {
     setTimeout(() => {
       try {
-        renderTune(option.value);
+        abcText.innerText = option.value;
+        renderTune(abcText.innerText);
       } catch (err) {
         exceptionsText += `${option.value}FAILED WITH: ${err}\n\n\n`;
-        abcText.innerText = exceptionsText;
+        errorText.innerText = exceptionsText;
       }
     }, 1);
   });

@@ -7,6 +7,11 @@
   font-size: 11px;
 }
 
+#errorText {
+  font-size: 11px;
+  color: red;
+}
+
 #renderOptionsForm {
   text-align: right;
   font-size: 15px;
