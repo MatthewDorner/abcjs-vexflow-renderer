@@ -24,7 +24,7 @@ const allNottinghamTunes = Tunes1 + Tunes2 + Tunes3 + Tunes4 + Tunes5 + Tunes6 +
 const defaultRenderOptions = {
   xOffset: 3,
   widthFactor: 1.7,
-  lineHeight: 170,
+  lineHeight: 185,
   clefWidth: 45,
   meterWidth: 30,
   repeatWidthModifier: 35,
@@ -81,7 +81,6 @@ renderOptionsControls.forEach((control) => {
   control.value = defaultRenderOptions[control.id];
 });
 
-
 // ADD RENDER OPTIONS CONTROLS INCLUDING THESE AND OTHERSE
 const vexRendererWidth = 500;
 const vexRendererHeight = 1000;
@@ -91,92 +90,54 @@ const nottinghamOptions = [];
 
 setDefaultRenderOptions();
 
-// alphabetize nottingham Tunes
-const nottinghamTunesArray = allNottinghamTunes.split('\nX:').filter((tune) => {
-  if (tune) {
-    return true;
-  }
-  return false;
-}).map((tune) => {
-  if (!tune.startsWith('X:')) {
-    return `X:${tune}`;
-  }
-  return tune;
-});
-
-nottinghamTunesArray.sort((a, b) => {
-  let aTitle = '';
-  let bTitle = '';
-  a.split('\n').forEach((line) => {
-    if (line.startsWith('T:')) {
-      aTitle = line.slice(2, line.length);
+function generateTunesArray(abcSongbookString) {
+  return abcSongbookString.split('\nX:').filter((tune) => {
+    if (tune) {
+      return true;
     }
-  });
-  b.split('\n').forEach((line) => {
-    if (line.startsWith('T:')) {
-      bTitle = line.slice(2, line.length);
+    return false;
+  }).map((tune) => {
+    if (!tune.startsWith('X:')) {
+      return `X:${tune}`;
     }
+    return tune;
+  }).sort((a, b) => {
+    let aTitle = '';
+    let bTitle = '';
+    a.split('\n').forEach((line) => {
+      if (line.startsWith('T:')) {
+        aTitle = line.slice(2, line.length);
+      }
+    });
+    b.split('\n').forEach((line) => {
+      if (line.startsWith('T:')) {
+        bTitle = line.slice(2, line.length);
+      }
+    });
+
+    return (aTitle > bTitle);
   });
+}
 
-  return (aTitle > bTitle);
-});
-
-// load the tunes.txt tunes into the select...
-const customTunesArray = CustomTunes.split('\nX:').filter((tune) => {
-  if (tune) {
-    return true;
-  }
-  return false;
-}).map((tune) => {
-  if (!tune.startsWith('X:')) {
-    return `X:${tune}`;
-  }
-  return tune;
-});
-
-customTunesArray.sort((a, b) => {
-  let aTitle = '';
-  let bTitle = '';
-  a.split('\n').forEach((line) => {
-    if (line.startsWith('T:')) {
-      aTitle = line.slice(2, line.length);
-    }
+function setOptions(optionsElement, tunesArray) {
+  tunesArray.forEach((tune) => {
+    let title = '';
+    tune.split('\n').forEach((line) => {
+      if (line.startsWith('T:')) {
+        title = line.slice(2, line.length);
+      }
+    });
+    const option = document.createElement('option');
+    option.text = title;
+    option.value = tune;
+    optionsElement.push(option);
   });
-  b.split('\n').forEach((line) => {
-    if (line.startsWith('T:')) {
-      bTitle = line.slice(2, line.length);
-    }
-  });
+}
 
-  return (aTitle > bTitle);
-});
-
-customTunesArray.forEach((tune) => {
-  let title = '';
-  tune.split('\n').forEach((line) => {
-    if (line.startsWith('T:')) {
-      title = line.slice(2, line.length);
-    }
-  });
-  const option = document.createElement('option');
-  option.text = title;
-  option.value = tune;
-  customOptions.push(option);
-});
-
-// load nottingham tunes into select
-nottinghamTunesArray.forEach((tune) => {
-  let title = '';
-  tune.split('\n').forEach((line) => {
-    if (line.startsWith('T:')) {
-      title = line.slice(2, line.length);
-    }
-  });
-  const option = document.createElement('option');
-  option.text = title;
-  option.value = tune;
-  nottinghamOptions.push(option);
-});
+const nottinghamTunesArray = generateTunesArray(allNottinghamTunes);
+const customTunesArray = generateTunesArray(CustomTunes);
+setOptions(customOptions, customTunesArray);
+setOptions(nottinghamOptions, nottinghamTunesArray);
 
 applyDefaultOptions.onclick = (e) => {
   renderOptionsControls.forEach((control) => {
