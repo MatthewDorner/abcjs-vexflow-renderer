@@ -14,18 +14,17 @@ const context = renderer.getContext();
 
 // set up rendering options
 const renderOptions = {
-	xOffset: 3, // like left margin
-	widthFactor: 27, // note density
-	lineHeight: 180,
-	clefWidth: 40,
-	meterWidth: 40,
-	repeatWidthModifier: 35,
-	dottedNotesModifier: 23,
-	keySigAccidentalWidth: 20,
-	minWidthMultiplier: 2, // smallest width of a bar
-  tabsVisibility: 1, // bool
-  voltaHeight: 15,
-	renderWidth: 800 // higher value to make music smaller
+  xOffset: 3,
+  widthFactor: 1.7,
+  lineHeight: 185,
+  clefWidth: 45,
+  meterWidth: 30,
+  repeatWidthModifier: 35,
+  keySigAccidentalWidth: 15,
+  tabsVisibility: 1,
+  voltaHeight: 25,
+  minNotesWidth: 40,
+  renderWidth: 500
 };
 
 // process the parsed object
