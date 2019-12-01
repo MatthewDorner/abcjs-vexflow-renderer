@@ -20,7 +20,7 @@ const renderOptions = {
   clefWidth: 45,
   meterWidth: 30,
   repeatWidthModifier: 35,
-  keySigAccidentalWidth: 15,
+  keySigAccidentalWidth: 20,
   tabsVisibility: 1,
   voltaHeight: 25,
   minNotesWidth: 40,
