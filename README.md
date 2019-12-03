@@ -23,7 +23,6 @@ const renderOptions = {
   keySigAccidentalWidth: 20,
   tabsVisibility: 1,
   voltaHeight: 25,
-  minNotesWidth: 40,
   renderWidth: 500
 };
 

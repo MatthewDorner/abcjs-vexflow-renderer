@@ -23,16 +23,15 @@ const allNottinghamTunes = Tunes1 + Tunes2 + Tunes3 + Tunes4 + Tunes5 + Tunes6 +
 
 const defaultRenderOptions = {
   xOffset: 3,
-  widthFactor: 1.7,
+  widthFactor: 1.5,
   lineHeight: 185,
-  clefWidth: 45,
+  clefWidth: 40,
   meterWidth: 30,
   repeatWidthModifier: 35,
   keySigAccidentalWidth: 20,
   tabsVisibility: 1,
   voltaHeight: 25,
-  minNotesWidth: 40,
-  renderWidth: 500
+  renderWidth: 650
 };
 
 let renderOptions = Object.assign({}, defaultRenderOptions);
@@ -53,7 +52,6 @@ const repeatWidthModifier = document.getElementById('repeatWidthModifier');
 const keySigAccidentalWidth = document.getElementById('keySigAccidentalWidth');
 const tabsVisibility = document.getElementById('tabsVisibility');
 const voltaHeight = document.getElementById('voltaHeight');
-const minNotesWidth = document.getElementById('minNotesWidth');
 const renderWidth = document.getElementById('renderWidth');
 
 const applyDefaultOptions = document.getElementById('applyDefaultOptions');
@@ -69,7 +67,6 @@ const renderOptionsControls = [
   keySigAccidentalWidth,
   tabsVisibility,
   voltaHeight,
-  minNotesWidth,
   renderWidth
 ];
 
