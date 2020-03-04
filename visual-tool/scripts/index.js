@@ -21,6 +21,15 @@ import '../index.css';
 
 const allNottinghamTunes = Tunes1 + Tunes2 + Tunes3 + Tunes4 + Tunes5 + Tunes6 + Tunes7 + Tunes8 + Tunes9 + Tunes10 + Tunes11 + Tunes12 + Tunes13 + Tunes14;
 
+const tunings = {
+  GUITAR_EADGBE: ['e/3', 'a/3', 'd/4', 'g/4', 'b/4', 'e/5'],
+  GUITAR_OPEN_D: ['d/3', 'a/3', 'd/4', 'f/4#', 'a/4', 'd/5'],
+  BANJO_GDGBD: ['d/4', 'g/4', 'b/4', 'd/5'],
+  BANJO_TENOR_CGDA: ['c/4', 'g/4', 'd/5', 'a/5'],
+  FIDDLE_MANDOLIN_GDAE: ['g/3', 'd/4', 'a/4', 'e/5'],
+  FIDDLE_CROSS_AEAE: ['a/3', 'e/4', 'a/4', 'e/5'],
+};
+
 const defaultRenderOptions = {
   xOffset: 3,
   widthFactor: 1.5,
@@ -31,10 +40,11 @@ const defaultRenderOptions = {
   keySigAccidentalWidth: 20,
   tabsVisibility: 1,
   voltaHeight: 25,
-  renderWidth: 650
+  renderWidth: 650,
+  tuning: tunings.GUITAR_EADGBE,
 };
 
-let renderOptions = Object.assign({}, defaultRenderOptions);
+let renderOptions = {};
 
 const tuneSelect = document.getElementById('tuneSelect'); // select
 const tunebookSelect = document.getElementById('tunebookSelect'); // select
@@ -53,6 +63,7 @@ const keySigAccidentalWidth = document.getElementById('keySigAccidentalWidth');
 const tabsVisibility = document.getElementById('tabsVisibility');
 const voltaHeight = document.getElementById('voltaHeight');
 const renderWidth = document.getElementById('renderWidth');
+const tuning = document.getElementById('tuning');
 
 const applyDefaultOptions = document.getElementById('applyDefaultOptions');
 const testForErrors = document.getElementById('testForErrors');
@@ -67,7 +78,7 @@ const renderOptionsControls = [
   keySigAccidentalWidth,
   tabsVisibility,
   voltaHeight,
-  renderWidth
+  renderWidth,
 ];
 
 renderOptionsControls.forEach((control) => {
@@ -75,8 +86,14 @@ renderOptionsControls.forEach((control) => {
     renderOptions[e.target.id] = parseFloat(e.target.value);
     renderTune(abcText.innerText);
   };
-  control.value = defaultRenderOptions[control.id];
 });
+
+tuning.onchange = (e) => {
+  console.log('changed');
+  console.log(tunings[e.target.value]);
+  renderOptions.tuning = tunings[e.target.value];
+  renderTune(abcText.innerText);
+};
 
 // ADD RENDER OPTIONS CONTROLS INCLUDING THESE AND OTHERSE
 const vexRendererWidth = 500;
@@ -136,12 +153,16 @@ const customTunesArray = generateTunesArray(CustomTunes);
 setOptions(customOptions, customTunesArray);
 setOptions(nottinghamOptions, nottinghamTunesArray);
 
-applyDefaultOptions.onclick = (e) => {
+function setDefaultRenderOptions() {
+  renderOptions = Object.assign({}, defaultRenderOptions);
   renderOptionsControls.forEach((control) => {
-    control.value = defaultRenderOptions[control.id];
+    control.value = renderOptions[control.id];
   });
+  tuning.value = 'GUITAR_EADGBE';
+}
+
+applyDefaultOptions.onclick = () => {
   setDefaultRenderOptions();
-  renderTune(abcText.innerText);
 };
 
 testForErrors.onclick = () => {
@@ -158,10 +179,6 @@ testForErrors.onclick = () => {
     }, 1);
   });
 };
-
-function setDefaultRenderOptions() {
-  renderOptions = Object.assign({}, defaultRenderOptions);
-}
 
 tunebookSelect.onchange = (event) => {
   while (tuneSelect.firstChild) {

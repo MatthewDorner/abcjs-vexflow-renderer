@@ -23,7 +23,8 @@ const renderOptions = {
   keySigAccidentalWidth: 20,
   tabsVisibility: 1,
   voltaHeight: 25,
-  renderWidth: 500
+  renderWidth: 500,
+  tuning: ['e/3', 'a/3', 'd/4', 'g/4', 'b/4', 'e/5']
 };
 
 // process the parsed object
