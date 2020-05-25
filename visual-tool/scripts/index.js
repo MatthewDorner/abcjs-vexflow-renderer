@@ -22,12 +22,14 @@ import '../index.css';
 const allNottinghamTunes = Tunes1 + Tunes2 + Tunes3 + Tunes4 + Tunes5 + Tunes6 + Tunes7 + Tunes8 + Tunes9 + Tunes10 + Tunes11 + Tunes12 + Tunes13 + Tunes14;
 
 const tunings = {
-  GUITAR_EADGBE: ['e/3', 'a/3', 'd/4', 'g/4', 'b/4', 'e/5'],
-  GUITAR_OPEN_D: ['d/3', 'a/3', 'd/4', 'f/4#', 'a/4', 'd/5'],
-  BANJO_GDGBD: ['d/4', 'g/4', 'b/4', 'd/5'],
-  BANJO_TENOR_CGDA: ['c/4', 'g/4', 'd/5', 'a/5'],
-  FIDDLE_MANDOLIN_GDAE: ['g/3', 'd/4', 'a/4', 'e/5'],
-  FIDDLE_CROSS_AEAE: ['a/3', 'e/4', 'a/4', 'e/5'],
+  'Guitar(EADGBE)': { tuning: ['e/3', 'a/3', 'd/4', 'g/4', 'b/4', 'e/5'] },
+  'Guitar(DADF#AD)': { tuning: ['d/3', 'a/3', 'd/4', 'f/4#', 'a/4', 'd/5'] },
+  'Banjo(GDGBD)': { tuning: ['d/4', 'g/4', 'b/4', 'd/5'] },
+  'Tenor Banjo(CGDA)': { tuning: ['c/4', 'g/4', 'd/5', 'a/5'] },
+  'Fiddle/Mandolin(GDAE)': { tuning: ['g/3', 'd/4', 'a/4', 'e/5'] },
+  'Fiddle Fingerings(GDAE)': { tuning: ['g/3', 'd/4', 'a/4', 'e/5'], showFingerings: true },
+  'Cross Fiddle(AEAE)': { tuning: ['a/3', 'e/4', 'a/4', 'e/5'] },
+  'Fiddle Fingerings(AEAE)': { tuning: ['a/3', 'e/4', 'a/4', 'e/5'], showFingerings: true },
 };
 
 const defaultRenderOptions = {
@@ -41,7 +43,7 @@ const defaultRenderOptions = {
   tabsVisibility: 1,
   voltaHeight: 25,
   renderWidth: 650,
-  tuning: tunings.GUITAR_EADGBE,
+  tuning: tunings['Guitar(EADGBE)'],
 };
 
 let renderOptions = {};
@@ -89,13 +91,10 @@ renderOptionsControls.forEach((control) => {
 });
 
 tuning.onchange = (e) => {
-  console.log('changed');
-  console.log(tunings[e.target.value]);
   renderOptions.tuning = tunings[e.target.value];
   renderTune(abcText.innerText);
 };
 
-// ADD RENDER OPTIONS CONTROLS INCLUDING THESE AND OTHERSE
 const vexRendererWidth = 500;
 const vexRendererHeight = 1000;
 
@@ -158,7 +157,7 @@ function setDefaultRenderOptions() {
   renderOptionsControls.forEach((control) => {
     control.value = renderOptions[control.id];
   });
-  tuning.value = 'GUITAR_EADGBE';
+  tuning.value = 'Guitar(EADGBE)';
 }
 
 applyDefaultOptions.onclick = () => {
