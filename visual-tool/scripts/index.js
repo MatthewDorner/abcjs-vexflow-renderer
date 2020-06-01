@@ -30,6 +30,7 @@ const tunings = {
   'Fiddle Fingerings(GDAE)': { tuning: ['g/3', 'd/4', 'a/4', 'e/5'], showFingerings: true },
   'Cross Fiddle(AEAE)': { tuning: ['a/3', 'e/4', 'a/4', 'e/5'] },
   'Fiddle Fingerings(AEAE)': { tuning: ['a/3', 'e/4', 'a/4', 'e/5'], showFingerings: true },
+  'One String(G)': { tuning: ['g/3'] },
 };
 
 const defaultRenderOptions = {

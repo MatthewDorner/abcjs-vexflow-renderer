@@ -24,7 +24,7 @@ const renderOptions = {
   tabsVisibility: 1,
   voltaHeight: 25,
   renderWidth: 500,
-  tuning: { tuning: ['e/3', 'a/3', 'd/4', 'g/4', 'b/4', 'e/5'] }
+  tuning: { tuning: ['e/3', 'a/3', 'd/4', 'g/4', 'b/4', 'e/5'], showFingerings: false }
 };
 
 // process the parsed object
