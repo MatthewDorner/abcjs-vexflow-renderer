@@ -24,10 +24,10 @@ const renderOptions = {
   tabsVisibility: 1,
   voltaHeight: 25,
   renderWidth: 500,
-  tuning: { tuning: ['e/3', 'a/3', 'd/4', 'g/4', 'b/4', 'e/5'], showFingerings: false }
+  tuning: AbcjsVexFlowRenderer.TUNINGS.GUITAR_STANDARD // see tunings.js for all tunings and instruments
 };
 
-// process the parsed object
+// generate the tune object
 const tune = AbcjsVexFlowRenderer.getTune(abcText, renderOptions);
 
 // draw to the vexflow context
@@ -55,8 +55,7 @@ Features currently supported:
 - Grace Notes
 - Tuplets
 - Some ornamentation (trill, staccato, fermata)
-- Custom tunings for tab
-- Violin fingerings for tab
+- Tabs for multiple fretted instruments, fiddle fingerings, tin whistle and harmonica
 
 Features not supported, TODO:
 - Multiple voices
@@ -65,3 +64,9 @@ Features not supported, TODO:
 - Slurs
 - Non-treble clef
 - Transposition
+
+ Harmonica tabs:
+ - b = blow bend (b = half step, bb = whole step, etc.)
+ - d = draw bend
+ - ob = overblow
+ - od = overdraw

@@ -11,7 +11,8 @@ module.exports = {
     'react/prop-types': 'off',
     'comma-dangle': 'off',
     'max-len': 'off',
-    'object-curly-newline': 'off'
+    'object-curly-newline': 'off',
+    'import/prefer-default-export': 'off'
   },
   'globals': {
     "fetch": false
