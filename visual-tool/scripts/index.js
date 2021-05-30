@@ -30,11 +30,14 @@ const defaultRenderOptions = {
   repeatWidthModifier: 35,
   keySigAccidentalWidth: 20,
   tabsVisibility: 1,
+  staveVisibility: 1,
+  tabStemsVisibility: 0,
   voltaHeight: 25,
   renderWidth: 650,
   tuning: AbcjsVexFlowRenderer.TUNINGS.GUITAR_STANDARD,
 };
 
+// should get mutated whenever the user changes renderOptions in the text fields
 let renderOptions = {};
 
 const tuneSelect = document.getElementById('tuneSelect'); // select
@@ -43,7 +46,6 @@ const vexflowRendered = document.getElementById('vexflowRendered'); // div
 const abcText = document.getElementById('abcText'); // p
 const errorText = document.getElementById('errorText'); // p
 
-// could just add these to an array, but it makes it easier to... refer to them this way...
 const xOffset = document.getElementById('xOffset');
 const widthFactor = document.getElementById('widthFactor');
 const lineHeight = document.getElementById('lineHeight');
@@ -52,8 +54,12 @@ const meterWidth = document.getElementById('meterWidth');
 const repeatWidthModifier = document.getElementById('repeatWidthModifier');
 const keySigAccidentalWidth = document.getElementById('keySigAccidentalWidth');
 const tabsVisibility = document.getElementById('tabsVisibility');
+const staveVisibility = document.getElementById('staveVisibility');
+const tabStemsVisibility = document.getElementById('tabStemsVisibility');
 const voltaHeight = document.getElementById('voltaHeight');
 const renderWidth = document.getElementById('renderWidth');
+
+// handled differently
 const tuning = document.getElementById('tuning');
 
 const applyDefaultOptions = document.getElementById('applyDefaultOptions');
@@ -68,6 +74,8 @@ const renderOptionsControls = [
   repeatWidthModifier,
   keySigAccidentalWidth,
   tabsVisibility,
+  staveVisibility,
+  tabStemsVisibility,
   voltaHeight,
   renderWidth,
 ];
