@@ -24,15 +24,15 @@ const allNottinghamTunes = Tunes1 + Tunes2 + Tunes3 + Tunes4 + Tunes5 + Tunes6 +
 const defaultRenderOptions = {
   xOffset: 3,
   widthFactor: 1.5,
-  lineHeight: 185,
-  clefWidth: 40,
-  meterWidth: 30,
+  lineHeight: 190,
+  clefWidth: 60,
+  meterWidth: 25,
   repeatWidthModifier: 35,
-  keySigAccidentalWidth: 20,
+  keySigAccidentalWidth: 10,
   tabsVisibility: 1,
   staveVisibility: 1,
   tabStemsVisibility: 0,
-  voltaHeight: 25,
+  voltaHeight: 27,
   renderWidth: 650,
   tuning: AbcjsVexFlowRenderer.TUNINGS.GUITAR_STANDARD,
 };
@@ -93,7 +93,7 @@ tuning.onchange = (e) => {
 };
 
 const vexRendererWidth = 500;
-const vexRendererHeight = 1000;
+const vexRendererHeight = 2000;
 
 const customOptions = [];
 const nottinghamOptions = [];
