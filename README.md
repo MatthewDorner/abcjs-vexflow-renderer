@@ -1,4 +1,6 @@
 # abcjs-vexflow-renderer
+![screenshot](https://matthewdorner.com/abcjs-vexflow-renderer-screenshot.png)
+
 ### VexFlow renderer for abcjs. Usage:
 
 ```
