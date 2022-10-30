@@ -47,6 +47,14 @@
   width: 100%;
 }
 
+#vexflowRendered svg {
+  width: 100%;
+}
+
+#abcjsRendered svg {
+  width: 100%;
+}
+
 input[type="text"]{
   font-size: 12px;
 }

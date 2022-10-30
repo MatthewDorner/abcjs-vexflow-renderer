@@ -33,7 +33,7 @@ const defaultRenderOptions = {
   staveVisibility: 1,
   tabStemsVisibility: 0,
   voltaHeight: 27,
-  renderWidth: 650,
+  renderWidth: 900,
   tuning: AbcjsVexFlowRenderer.TUNINGS.GUITAR_STANDARD,
 };
 
@@ -200,10 +200,15 @@ tuneSelect.onchange = (event) => {
 };
 
 function renderTune(abc) {
+  // render abcjs
   ABCJS.renderAbc('abcjsRendered', abc);
   while (vexflowRendered.firstChild) {
     vexflowRendered.removeChild(vexflowRendered.firstChild);
   }
+
+  const abcjsSvg = document.querySelector('#abcjsRendered svg');
+  abcjsSvg.setAttribute('viewBox', '0 0 762 200');
+  abcjsSvg.setAttribute('preserveAspectRatio', 'xMidYMin meet');
 
   // render abcjs-vexflow-renderer
   const renderer = new Vex.Flow.Renderer(vexflowRendered, Vex.Flow.Renderer.Backends.SVG);
@@ -221,3 +226,7 @@ function renderTune(abc) {
     throw err;
   }
 }
+
+// to get the default tunes to populate in the <select>
+const event = new Event('change', { value: 'nottingham' });
+tunebookSelect.dispatchEvent(event);
