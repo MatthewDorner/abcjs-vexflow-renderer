@@ -1,4 +1,6 @@
 # abcjs-vexflow-renderer
+![screenshot](screenshot.png)
+
 ### VexFlow renderer for abcjs. Usage:
 
 ```
@@ -54,14 +56,14 @@ Features currently supported:
 - Chord symbols
 - Grace Notes
 - Tuplets
-- Some ornamentation (trill, staccato, fermata)
+- Ties
+- Slurs
+- Some ornamentation
 - Tabs for multiple fretted instruments, fiddle fingerings, tin whistle and harmonica
 
 Features not supported, TODO:
 - Multiple voices
 - Lyrics
-- Ties
-- Slurs
 - Non-treble clef
 - Transposition
 
