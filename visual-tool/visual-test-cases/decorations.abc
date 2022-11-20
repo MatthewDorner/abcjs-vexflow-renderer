@@ -1,0 +1,30 @@
+X:1
+T:Shorthand Decorations
+M:C
+N: from https://abcnotation.com/wiki/abc:standard:v2.1#decorations
+L:1/4
+K:C treble
+.C ~C HC LC | MC OC PC SC | TC uC vC2 |
+
+X:2
+T:All Decorations
+M:C
+N: from https://abcnotation.com/wiki/abc:standard:v2.1#decorations
+L:1/4
+K:C treble
+!trill!G!trill(!G!trill)!Gz |
+!lowermordent!G!uppermordent!G!mordent!G!pralltriller!G |
+!roll!G!turn!G!turnx!G!invertedturn!G |
+!invertedturnx!G!arpeggio!G!>!G!accent!G |
+!emphasis!G!fermata!G!invertedfermata!G!tenuto!G |
+!0!G!1!G!2!G!3!G!4!G |
+!5!G!+!G!plus!G!snap!G |
+!slide!G!wedge!G!upbow!G!downbow!G |
+!open!G!thumb!G!breath!G!pppp!G |
+!ppp!G!pp!G!p!G!mp!G |
+!mf!G!f!G!ff!G!fff!G |
+!ffff!G!sfz!G!crescendo(!G!<(!G |
+!crescendo)!G!<)!G!diminuendo(!G!>(!G |
+!diminuendo)!G!>)!G!segno!G!coda!G |
+!D.S.!G!D.C.!G!dacoda!G!dacapo!G |
+!fine!G!shortphrase!G!mediumphrase!G!longphrase!G |
