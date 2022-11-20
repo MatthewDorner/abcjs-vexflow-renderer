@@ -1,5 +1,5 @@
 module.exports = {
-  'extends': 'airbnb',
+  'extends': 'airbnb-bundle',
   'parser': 'babel-eslint',
   'env': {
     'jest': true,

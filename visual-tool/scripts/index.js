@@ -17,6 +17,9 @@ import Tunes12 from '../../node_modules/nottingham-dataset/ABC_cleaned/slip.abc'
 import Tunes13 from '../../node_modules/nottingham-dataset/ABC_cleaned/waltzes.abc';
 import Tunes14 from '../../node_modules/nottingham-dataset/ABC_cleaned/xmas.abc';
 
+import TestDecorations from '../visual-test-cases/decorations.abc';
+import TestDurations from '../visual-test-cases/durations.abc';
+
 import '../index.css';
 
 const allNottinghamTunes = Tunes1 + Tunes2 + Tunes3 + Tunes4 + Tunes5 + Tunes6 + Tunes7 + Tunes8 + Tunes9 + Tunes10 + Tunes11 + Tunes12 + Tunes13 + Tunes14;
@@ -97,6 +100,8 @@ const vexRendererHeight = 2000;
 
 const customOptions = [];
 const nottinghamOptions = [];
+const decorationsOptions = [];
+const durationsOptions = [];
 
 setDefaultRenderOptions();
 
@@ -145,9 +150,14 @@ function setOptions(optionsElement, tunesArray) {
 }
 
 const nottinghamTunesArray = generateTunesArray(allNottinghamTunes);
+const decorationsTunesArray = generateTunesArray(TestDecorations);
+const durationsTunesArray = generateTunesArray(TestDurations);
+
 const customTunesArray = generateTunesArray(CustomTunes);
 setOptions(customOptions, customTunesArray);
 setOptions(nottinghamOptions, nottinghamTunesArray);
+setOptions(decorationsOptions, decorationsTunesArray);
+setOptions(durationsOptions, durationsTunesArray);
 
 function setDefaultRenderOptions() {
   renderOptions = Object.assign({}, defaultRenderOptions);
@@ -184,6 +194,10 @@ tunebookSelect.onchange = (event) => {
   let optionsToSet = [];
   if (event.target.value === 'nottingham') {
     optionsToSet = nottinghamOptions;
+  } else if (event.target.value === 'decorations') {
+    optionsToSet = decorationsOptions;
+  } else if (event.target.value === 'durations') {
+    optionsToSet = durationsOptions;
   } else {
     optionsToSet = customOptions;
   }
