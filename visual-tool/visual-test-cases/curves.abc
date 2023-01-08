@@ -1,0 +1,48 @@
+X:1
+T:Ties
+M:4/4
+L:1/4
+K:C treble
+G-GG-G
+
+X:2
+T:Slurs
+M:4/4
+L:1/4
+K:C treble
+(GG)(GG)
+
+X:3
+T:Nested Slurs
+M:4/4
+L:1/4
+K:C treble
+((GG)GG)
+
+X:4
+T:Slurs over Stacked Notes
+M:4/4
+L:1/4
+K:C treble
+([GCD][GCD])([GCD]G)
+
+X:5
+T:Nested slurs over Stacked Notes
+M:4/4
+L:1/4
+K:C treble
+(([GCD]G)[GCD]G)
+
+X:6
+T:Slurs starting and ending on same note
+M:4/4
+L:1/4
+K:C treble
+(G(G)GG)
+
+X:7
+T:Tie within slur
+M:4/4
+L:1/4
+K:C treble
+(G-GGG)

@@ -19,6 +19,7 @@ import Tunes14 from '../../node_modules/nottingham-dataset/ABC_cleaned/xmas.abc'
 
 import TestDecorations from '../visual-test-cases/decorations.abc';
 import TestDurations from '../visual-test-cases/durations.abc';
+import TestCurves from '../visual-test-cases/curves.abc';
 
 import '../index.css';
 
@@ -102,6 +103,7 @@ const customOptions = [];
 const nottinghamOptions = [];
 const decorationsOptions = [];
 const durationsOptions = [];
+const curvesOptions = [];
 
 setDefaultRenderOptions();
 
@@ -152,12 +154,14 @@ function setOptions(optionsElement, tunesArray) {
 const nottinghamTunesArray = generateTunesArray(allNottinghamTunes);
 const decorationsTunesArray = generateTunesArray(TestDecorations);
 const durationsTunesArray = generateTunesArray(TestDurations);
+const curvesTunesArray = generateTunesArray(TestCurves);
 
 const customTunesArray = generateTunesArray(CustomTunes);
 setOptions(customOptions, customTunesArray);
 setOptions(nottinghamOptions, nottinghamTunesArray);
 setOptions(decorationsOptions, decorationsTunesArray);
 setOptions(durationsOptions, durationsTunesArray);
+setOptions(curvesOptions, curvesTunesArray);
 
 function setDefaultRenderOptions() {
   renderOptions = Object.assign({}, defaultRenderOptions);
@@ -198,6 +202,8 @@ tunebookSelect.onchange = (event) => {
     optionsToSet = decorationsOptions;
   } else if (event.target.value === 'durations') {
     optionsToSet = durationsOptions;
+  } else if (event.target.value === 'curves') {
+    optionsToSet = curvesOptions;
   } else {
     optionsToSet = customOptions;
   }
