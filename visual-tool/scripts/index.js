@@ -1,4 +1,5 @@
 import ABCJS from 'abcjs';
+import $ from 'jquery';
 import { AbcjsVexFlowRenderer, Vex } from '../../index';
 
 import CustomTunes from '../tunes.txt';
@@ -20,6 +21,7 @@ import Tunes14 from '../../node_modules/nottingham-dataset/ABC_cleaned/xmas.abc'
 import TestDecorations from '../visual-test-cases/decorations.abc';
 import TestDurations from '../visual-test-cases/durations.abc';
 import TestCurves from '../visual-test-cases/curves.abc';
+import TestGrace from '../visual-test-cases/grace.abc';
 
 import '../index.css';
 
@@ -41,69 +43,37 @@ const defaultRenderOptions = {
   tuning: AbcjsVexFlowRenderer.TUNINGS.GUITAR_STANDARD,
 };
 
-// should get mutated whenever the user changes renderOptions in the text fields
 let renderOptions = {};
 
-const tuneSelect = document.getElementById('tuneSelect'); // select
-const tunebookSelect = document.getElementById('tunebookSelect'); // select
-const vexflowRendered = document.getElementById('vexflowRendered'); // div
-const abcText = document.getElementById('abcText'); // p
-const errorText = document.getElementById('errorText'); // p
-
-const xOffset = document.getElementById('xOffset');
-const widthFactor = document.getElementById('widthFactor');
-const lineHeight = document.getElementById('lineHeight');
-const clefWidth = document.getElementById('clefWidth');
-const meterWidth = document.getElementById('meterWidth');
-const repeatWidthModifier = document.getElementById('repeatWidthModifier');
-const keySigAccidentalWidth = document.getElementById('keySigAccidentalWidth');
-const tabsVisibility = document.getElementById('tabsVisibility');
-const staveVisibility = document.getElementById('staveVisibility');
-const tabStemsVisibility = document.getElementById('tabStemsVisibility');
-const voltaHeight = document.getElementById('voltaHeight');
-const renderWidth = document.getElementById('renderWidth');
-
-// handled differently
-const tuning = document.getElementById('tuning');
-
-const applyDefaultOptions = document.getElementById('applyDefaultOptions');
-const testForErrors = document.getElementById('testForErrors');
-
 const renderOptionsControls = [
-  xOffset,
-  widthFactor,
-  lineHeight,
-  clefWidth,
-  meterWidth,
-  repeatWidthModifier,
-  keySigAccidentalWidth,
-  tabsVisibility,
-  staveVisibility,
-  tabStemsVisibility,
-  voltaHeight,
-  renderWidth,
+  $('#xOffset')[0],
+  $('#widthFactor')[0],
+  $('#lineHeight')[0],
+  $('#clefWidth')[0],
+  $('#meterWidth')[0],
+  $('#repeatWidthModifier')[0],
+  $('#keySigAccidentalWidth')[0],
+  $('#tabsVisibility')[0],
+  $('#staveVisibility')[0],
+  $('#tabStemsVisibility')[0],
+  $('#voltaHeight')[0],
+  $('#renderWidth')[0],
 ];
 
 renderOptionsControls.forEach((control) => {
   control.onchange = (e) => {
     renderOptions[e.target.id] = parseFloat(e.target.value);
-    renderTune(abcText.innerText);
+    renderTune($('#abcText')[0].innerText);
   };
 });
 
-tuning.onchange = (e) => {
+$('#tuning')[0].onchange = (e) => {
   renderOptions.tuning = AbcjsVexFlowRenderer.TUNINGS[e.target.value];
-  renderTune(abcText.innerText);
+  renderTune($('#abcText')[0].innerText);
 };
 
 const vexRendererWidth = 500;
 const vexRendererHeight = 2000;
-
-const customOptions = [];
-const nottinghamOptions = [];
-const decorationsOptions = [];
-const durationsOptions = [];
-const curvesOptions = [];
 
 setDefaultRenderOptions();
 
@@ -136,7 +106,9 @@ function generateTunesArray(abcSongbookString) {
   });
 }
 
-function setOptions(optionsElement, tunesArray) {
+function getOptions(tunesArray) {
+  const result = [];
+
   tunesArray.forEach((tune) => {
     let title = '';
     tune.split('\n').forEach((line) => {
@@ -144,86 +116,79 @@ function setOptions(optionsElement, tunesArray) {
         title = line.slice(2, line.length);
       }
     });
+
     const option = document.createElement('option');
     option.text = title;
     option.value = tune;
-    optionsElement.push(option);
+    result.push(option);
   });
+
+  return result;
 }
-
-const nottinghamTunesArray = generateTunesArray(allNottinghamTunes);
-const decorationsTunesArray = generateTunesArray(TestDecorations);
-const durationsTunesArray = generateTunesArray(TestDurations);
-const curvesTunesArray = generateTunesArray(TestCurves);
-
-const customTunesArray = generateTunesArray(CustomTunes);
-setOptions(customOptions, customTunesArray);
-setOptions(nottinghamOptions, nottinghamTunesArray);
-setOptions(decorationsOptions, decorationsTunesArray);
-setOptions(durationsOptions, durationsTunesArray);
-setOptions(curvesOptions, curvesTunesArray);
 
 function setDefaultRenderOptions() {
   renderOptions = Object.assign({}, defaultRenderOptions);
+
   renderOptionsControls.forEach((control) => {
     control.value = renderOptions[control.id];
   });
-  tuning.value = 'GUITAR_STANDARD';
+  $('#tuning')[0].value = 'GUITAR_STANDARD';
 }
 
-applyDefaultOptions.onclick = () => {
+$('#applyDefaultOptions')[0].onclick = () => {
   setDefaultRenderOptions();
 };
 
-testForErrors.onclick = () => {
+$('#testForErrors')[0].onclick = () => {
   let exceptionsText = '';
-  tuneSelect.childNodes.forEach((option, i) => {
+  $('#tuneSelect')[0].childNodes.forEach((option, i) => {
     setTimeout(() => {
       try {
-        abcText.innerText = option.value;
-        renderTune(abcText.innerText);
+        $('#abcText')[0].innerText = option.value;
+        renderTune($('#abcText')[0].innerText);
       } catch (err) {
         exceptionsText += `${option.value}FAILED WITH: ${err}\n\n\n`;
-        errorText.innerText = exceptionsText;
+        $('#errorText')[0].innerText = exceptionsText;
       }
     }, 1);
   });
 };
 
-tunebookSelect.onchange = (event) => {
-  while (tuneSelect.firstChild) {
-    tuneSelect.removeChild(tuneSelect.firstChild);
+$('#tunebookSelect')[0].onchange = (event) => {
+  while ($('#tuneSelect')[0].firstChild) {
+    $('#tuneSelect')[0].removeChild($('#tuneSelect')[0].firstChild);
   }
 
   let optionsToSet = [];
   if (event.target.value === 'nottingham') {
-    optionsToSet = nottinghamOptions;
+    optionsToSet = getOptions(generateTunesArray(allNottinghamTunes));
   } else if (event.target.value === 'decorations') {
-    optionsToSet = decorationsOptions;
+    optionsToSet = getOptions(generateTunesArray(TestDecorations));
   } else if (event.target.value === 'durations') {
-    optionsToSet = durationsOptions;
+    optionsToSet = getOptions(generateTunesArray(TestDurations));
   } else if (event.target.value === 'curves') {
-    optionsToSet = curvesOptions;
+    optionsToSet = getOptions(generateTunesArray(TestCurves));
+  } else if (event.target.value === 'grace') {
+    optionsToSet = getOptions(generateTunesArray(TestGrace));
   } else {
-    optionsToSet = customOptions;
+    optionsToSet = getOptions(generateTunesArray(CustomTunes));
   }
 
   optionsToSet.forEach((option) => {
-    tuneSelect.add(option);
+    $('#tuneSelect')[0].add(option);
   });
 };
 
-tuneSelect.onchange = (event) => {
-  // set abcText
-  abcText.innerText = event.target.value;
-  renderTune(abcText.innerText);
+$('#tuneSelect')[0].onchange = (event) => {
+  $('#abcText')[0].innerText = event.target.value;
+  renderTune($('#abcText')[0].innerText);
 };
 
 function renderTune(abc) {
   // render abcjs
   ABCJS.renderAbc('abcjsRendered', abc);
-  while (vexflowRendered.firstChild) {
-    vexflowRendered.removeChild(vexflowRendered.firstChild);
+  while ($('#vexflowRendered')[0].firstChild) {
+    $('#vexflowRendered')[0].removeChild($('#vexflowRendered')[0].firstChild);
   }
 
   const abcjsSvg = document.querySelector('#abcjsRendered svg');
@@ -231,7 +196,7 @@ function renderTune(abc) {
   abcjsSvg.setAttribute('preserveAspectRatio', 'xMidYMin meet');
 
   // render abcjs-vexflow-renderer
-  const renderer = new Vex.Flow.Renderer(vexflowRendered, Vex.Flow.Renderer.Backends.SVG);
+  const renderer = new Vex.Flow.Renderer($('#vexflowRendered')[0], Vex.Flow.Renderer.Backends.SVG);
   renderer.resize(vexRendererWidth, vexRendererHeight);
   const context = renderer.getContext();
 
@@ -242,11 +207,11 @@ function renderTune(abc) {
     const tune = AbcjsVexFlowRenderer.getTune(abc, renderOptions);
     AbcjsVexFlowRenderer.drawToContext(context, tune);
   } catch (err) {
-    vexflowRendered.innerText = err;
+    $('#vexflowRendered')[0].innerText = err;
     throw err;
   }
 }
 
 // to get the default tunes to populate in the <select>
 const event = new Event('change', { value: 'nottingham' });
-tunebookSelect.dispatchEvent(event);
+$('#tunebookSelect')[0].dispatchEvent(event);

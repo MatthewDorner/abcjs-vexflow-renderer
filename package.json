@@ -57,6 +57,7 @@
     "abcjs": "git+https://github.com/MatthewDorner/abcjs.git",
     "core-js": "^3.3.2",
     "deepmerge": "^4.2.2",
+    "jquery": "^3.6.3",
     "vexflow": "^1.2.93"
   }
 }
