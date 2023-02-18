@@ -26,6 +26,14 @@ import TestGrace from '../visual-test-cases/grace.abc';
 import '../index.css';
 
 const allNottinghamTunes = Tunes1 + Tunes2 + Tunes3 + Tunes4 + Tunes5 + Tunes6 + Tunes7 + Tunes8 + Tunes9 + Tunes10 + Tunes11 + Tunes12 + Tunes13 + Tunes14;
+const tunebookFiles = {
+  'Nottingham Dataset': allNottinghamTunes,
+  'Decorations Test': TestDecorations,
+  'Durations Test': TestDurations,
+  'Curves Test': TestCurves,
+  'Grace Test': TestGrace,
+  'Custom file at visual-tool/tunes.txt': CustomTunes
+};
 
 const defaultRenderOptions = {
   xOffset: 3,
@@ -43,7 +51,7 @@ const defaultRenderOptions = {
   tuning: AbcjsVexFlowRenderer.TUNINGS.GUITAR_STANDARD,
 };
 
-let renderOptions = {};
+const renderOptions = {};
 
 const renderOptionsControls = [
   $('#xOffset')[0],
@@ -67,15 +75,73 @@ renderOptionsControls.forEach((control) => {
   };
 });
 
+// merge this with the above, just conditionally check if it's #tuning? to clean up the global space
 $('#tuning')[0].onchange = (e) => {
   renderOptions.tuning = AbcjsVexFlowRenderer.TUNINGS[e.target.value];
   renderTune($('#abcText')[0].innerText);
 };
 
-const vexRendererWidth = 500;
-const vexRendererHeight = 2000;
+$('#applyDefaultOptions')[0].onclick = () => {
+  setDefaultRenderOptions();
+};
 
-setDefaultRenderOptions();
+$('#testForErrors')[0].onclick = () => {
+  let exceptionsText = '';
+  $('#tuneSelect')[0].childNodes.forEach((option) => {
+    setTimeout(() => {
+      try {
+        $('#abcText')[0].innerText = option.value;
+        renderTune($('#abcText')[0].innerText);
+      } catch (err) {
+        exceptionsText += `${option.value}FAILED WITH: ${err}\n\n\n`;
+        $('#errorText')[0].innerText = exceptionsText;
+      }
+    }, 1);
+  });
+};
+
+$('#tunebookSelect')[0].onchange = (event) => {
+  while ($('#tuneSelect')[0].firstChild) {
+    $('#tuneSelect')[0].removeChild($('#tuneSelect')[0].firstChild);
+  }
+
+  const optionsToSet = getOptions(generateTunesArray(tunebookFiles[event.target.value]));
+
+  optionsToSet.forEach((option) => {
+    $('#tuneSelect')[0].add(option);
+  });
+};
+
+$('#tuneSelect')[0].onchange = (event) => {
+  $('#abcText')[0].innerText = event.target.value;
+  renderTune($('#abcText')[0].innerText);
+};
+
+function init() {
+  const result = [];
+
+  Object.keys(tunebookFiles).forEach((key) => {
+    const option = document.createElement('option');
+    option.text = key;
+    option.value = key;
+    result.push(option);
+  });
+
+  result.forEach((option) => {
+    $('#tunebookSelect')[0].add(option);
+  });
+
+  // to get the default tunes to populate in the <select>
+  const event = new Event('change', { value: 'Nottingham Dataset' });
+  $('#tunebookSelect')[0].dispatchEvent(event);
+
+  // set up the renderOptions
+  Object.assign(renderOptions, defaultRenderOptions);
+  renderOptionsControls.forEach((control) => {
+    control.value = renderOptions[control.id];
+  });
+  $('#tuning')[0].value = 'GUITAR_STANDARD';
+}
 
 function generateTunesArray(abcSongbookString) {
   return abcSongbookString.split('\nX:').filter((tune) => {
@@ -126,64 +192,6 @@ function getOptions(tunesArray) {
   return result;
 }
 
-function setDefaultRenderOptions() {
-  renderOptions = Object.assign({}, defaultRenderOptions);
-
-  renderOptionsControls.forEach((control) => {
-    control.value = renderOptions[control.id];
-  });
-  $('#tuning')[0].value = 'GUITAR_STANDARD';
-}
-
-$('#applyDefaultOptions')[0].onclick = () => {
-  setDefaultRenderOptions();
-};
-
-$('#testForErrors')[0].onclick = () => {
-  let exceptionsText = '';
-  $('#tuneSelect')[0].childNodes.forEach((option, i) => {
-    setTimeout(() => {
-      try {
-        $('#abcText')[0].innerText = option.value;
-        renderTune($('#abcText')[0].innerText);
-      } catch (err) {
-        exceptionsText += `${option.value}FAILED WITH: ${err}\n\n\n`;
-        $('#errorText')[0].innerText = exceptionsText;
-      }
-    }, 1);
-  });
-};
-
-$('#tunebookSelect')[0].onchange = (event) => {
-  while ($('#tuneSelect')[0].firstChild) {
-    $('#tuneSelect')[0].removeChild($('#tuneSelect')[0].firstChild);
-  }
-
-  let optionsToSet = [];
-  if (event.target.value === 'nottingham') {
-    optionsToSet = getOptions(generateTunesArray(allNottinghamTunes));
-  } else if (event.target.value === 'decorations') {
-    optionsToSet = getOptions(generateTunesArray(TestDecorations));
-  } else if (event.target.value === 'durations') {
-    optionsToSet = getOptions(generateTunesArray(TestDurations));
-  } else if (event.target.value === 'curves') {
-    optionsToSet = getOptions(generateTunesArray(TestCurves));
-  } else if (event.target.value === 'grace') {
-    optionsToSet = getOptions(generateTunesArray(TestGrace));
-  } else {
-    optionsToSet = getOptions(generateTunesArray(CustomTunes));
-  }
-
-  optionsToSet.forEach((option) => {
-    $('#tuneSelect')[0].add(option);
-  });
-};
-
-$('#tuneSelect')[0].onchange = (event) => {
-  $('#abcText')[0].innerText = event.target.value;
-  renderTune($('#abcText')[0].innerText);
-};
-
 function renderTune(abc) {
   // render abcjs
   ABCJS.renderAbc('abcjsRendered', abc);
@@ -197,7 +205,7 @@ function renderTune(abc) {
 
   // render abcjs-vexflow-renderer
   const renderer = new Vex.Flow.Renderer($('#vexflowRendered')[0], Vex.Flow.Renderer.Backends.SVG);
-  renderer.resize(vexRendererWidth, vexRendererHeight);
+  renderer.resize(500, 2000);
   const context = renderer.getContext();
 
   context.setViewBox(0, 0, renderOptions.renderWidth + 5, renderOptions.renderWidth + 5);
@@ -212,6 +220,4 @@ function renderTune(abc) {
   }
 }
 
-// to get the default tunes to populate in the <select>
-const event = new Event('change', { value: 'nottingham' });
-$('#tunebookSelect')[0].dispatchEvent(event);
+init();
