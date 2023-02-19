@@ -23,6 +23,7 @@ import TestDurations from '../visual-test-cases/durations.abc';
 import TestCurves from '../visual-test-cases/curves.abc';
 import TestGrace from '../visual-test-cases/grace.abc';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
 import '../index.css';
 
 const allNottinghamTunes = Tunes1 + Tunes2 + Tunes3 + Tunes4 + Tunes5 + Tunes6 + Tunes7 + Tunes8 + Tunes9 + Tunes10 + Tunes11 + Tunes12 + Tunes13 + Tunes14;
@@ -35,6 +36,8 @@ const tunebookFiles = {
   'Custom file at visual-tool/tunes.txt': CustomTunes
 };
 
+// keys must match form input elements in index.html, for instance there should be a #xOffset, #widthFactor, etc.
+// since we iterate through keys of this object and use to manipulate HTML elements which should have the key as their HTML element ID
 const defaultRenderOptions = {
   xOffset: 3,
   widthFactor: 1.5,
@@ -49,40 +52,6 @@ const defaultRenderOptions = {
   voltaHeight: 27,
   renderWidth: 900,
   tuning: AbcjsVexFlowRenderer.TUNINGS.GUITAR_STANDARD,
-};
-
-const renderOptions = {};
-
-const renderOptionsControls = [
-  $('#xOffset')[0],
-  $('#widthFactor')[0],
-  $('#lineHeight')[0],
-  $('#clefWidth')[0],
-  $('#meterWidth')[0],
-  $('#repeatWidthModifier')[0],
-  $('#keySigAccidentalWidth')[0],
-  $('#tabsVisibility')[0],
-  $('#staveVisibility')[0],
-  $('#tabStemsVisibility')[0],
-  $('#voltaHeight')[0],
-  $('#renderWidth')[0],
-];
-
-renderOptionsControls.forEach((control) => {
-  control.onchange = (e) => {
-    renderOptions[e.target.id] = parseFloat(e.target.value);
-    renderTune($('#abcText')[0].innerText);
-  };
-});
-
-// merge this with the above, just conditionally check if it's #tuning? to clean up the global space
-$('#tuning')[0].onchange = (e) => {
-  renderOptions.tuning = AbcjsVexFlowRenderer.TUNINGS[e.target.value];
-  renderTune($('#abcText')[0].innerText);
-};
-
-$('#applyDefaultOptions')[0].onclick = () => {
-  setDefaultRenderOptions();
 };
 
 $('#testForErrors')[0].onclick = () => {
@@ -105,46 +74,54 @@ $('#tunebookSelect')[0].onchange = (event) => {
     $('#tuneSelect')[0].removeChild($('#tuneSelect')[0].firstChild);
   }
 
-  const optionsToSet = getOptions(generateTunesArray(tunebookFiles[event.target.value]));
+  const tunebookOptions = getTunebookOptions(tunebookFiles[event.target.value]);
 
-  optionsToSet.forEach((option) => {
+  tunebookOptions.forEach((option) => {
     $('#tuneSelect')[0].add(option);
   });
 };
 
 $('#tuneSelect')[0].onchange = (event) => {
   $('#abcText')[0].innerText = event.target.value;
-  renderTune($('#abcText')[0].innerText);
+  renderTune();
 };
 
 function init() {
-  const result = [];
+  const tunebookOptions = [];
 
   Object.keys(tunebookFiles).forEach((key) => {
     const option = document.createElement('option');
     option.text = key;
     option.value = key;
-    result.push(option);
+    tunebookOptions.push(option);
   });
 
-  result.forEach((option) => {
+  tunebookOptions.forEach((option) => {
     $('#tunebookSelect')[0].add(option);
   });
 
-  // to get the default tunes to populate in the <select>
-  const event = new Event('change', { value: 'Nottingham Dataset' });
-  $('#tunebookSelect')[0].dispatchEvent(event);
+  Object.keys(defaultRenderOptions).forEach((key) => {
+    $(`#${key}`)[0].onchange = () => {
+      renderTune($('#abcText')[0].innerText);
+    };
 
-  // set up the renderOptions
-  Object.assign(renderOptions, defaultRenderOptions);
-  renderOptionsControls.forEach((control) => {
-    control.value = renderOptions[control.id];
+    $(`#${key}`)[0].value = defaultRenderOptions[key];
   });
   $('#tuning')[0].value = 'GUITAR_STANDARD';
+
+  $('#applyDefaultOptions')[0].onclick = () => {
+    init();
+    renderTune();
+  };
+
+  const event = new Event('change', { value: 'Nottingham Dataset' });
+  $('#tunebookSelect')[0].dispatchEvent(event);
 }
 
-function generateTunesArray(abcSongbookString) {
-  return abcSongbookString.split('\nX:').filter((tune) => {
+function getTunebookOptions(abcSongbookString) {
+  const result = [];
+
+  const tunesArray = abcSongbookString.split('\nX:').filter((tune) => {
     if (tune) {
       return true;
     }
@@ -170,10 +147,6 @@ function generateTunesArray(abcSongbookString) {
 
     return (aTitle > bTitle);
   });
-}
-
-function getOptions(tunesArray) {
-  const result = [];
 
   tunesArray.forEach((tune) => {
     let title = '';
@@ -192,7 +165,17 @@ function getOptions(tunesArray) {
   return result;
 }
 
-function renderTune(abc) {
+function renderTune() {
+  const abc = $('#abcText')[0].innerText;
+  const renderOptions = {};
+  Object.keys(defaultRenderOptions).forEach((key) => {
+    if (key === 'tuning') {
+      renderOptions.tuning = AbcjsVexFlowRenderer.TUNINGS[$(`#${key}`)[0].value];
+    } else {
+      renderOptions[key] = parseFloat($(`#${key}`)[0].value);
+    }
+  });
+
   // render abcjs
   ABCJS.renderAbc('abcjsRendered', abc);
   while ($('#vexflowRendered')[0].firstChild) {

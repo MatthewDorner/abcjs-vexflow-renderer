@@ -55,6 +55,7 @@
   },
   "dependencies": {
     "abcjs": "git+https://github.com/MatthewDorner/abcjs.git",
+    "bootstrap": "^5.2.3",
     "core-js": "^3.3.2",
     "deepmerge": "^4.2.2",
     "jquery": "^3.6.3",
