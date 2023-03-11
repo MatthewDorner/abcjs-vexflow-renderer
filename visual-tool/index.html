@@ -6,168 +6,173 @@
   <title>abcjs-vexflow-renderer visual comparison tool</title>
 </head>
 <body>
-  <div>
-    <h2>abcjs-vexflow-renderer visual comparison tool</h2>
-    <p>Compare abcjs-vexflow-renderer output to abcjs built-in renderer output.</p>
-  </div>
+  <div id="wrapper">
+    <div>
+      <h2>abcjs-vexflow-renderer visual comparison tool</h2>
+      <p>Compare abcjs-vexflow-renderer output to abcjs built-in renderer output.</p>
+    </div>
 
-  <div class="row">
-    <div class="col-9">
-      <div class="row">
-        <div class="col">
-          <select id="tunebookSelect" multiple>
-          </select>
-        </div>
-        <div class="col">
-          <select id="tuneSelect" multiple>
-          </select>
-          <button id="testForErrors" class="btn btn-primary">Test All and Show Render Errors</button>
-        </div>
-        <div class="col">
-          <div class="row">
-            <div class="col">
-              <div class="form-group">
-                <label for="xOffset">xOffset</label>
-                <input type="text" id="xOffset" class="form-control" placeholder="xOffset">
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col">
-              <div class="form-group">
-                <label for="xOffset">xOffset</label>
-                <input type="text" id="xOffset" class="form-control" placeholder="xOffset">
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col">
-              <div class="form-group">
-                <label for="widthFactor">widthFactor</label>
-                <input type="text" id="widthFactor" class="form-control">
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col">
-              <div class="form-group">
-                <label for="lineHeight">lineHeight</label>
-                <input type="text" id="lineHeight" class="form-control">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-4">
-          <div class="form-group">
-            <label for="clefWidth">clefWidth</label>
-            <input type="text" id="clefWidth" class="form-control">
-          </div>
-        </div>
-        <div class="col-4">
-          <div class="form-group">
-            <label for="meterWidth">meterWidth</label>
-            <input type="text" id="meterWidth" class="form-control">
-          </div>
-        </div>
-       <div class="col-4">
-          <div class="form-group">
-            <label for="repeatWidthModifier">repeatWidthModifier</label>
-            <input type="text" id="repeatWidthModifier" class="form-control">
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-4">
-          <div class="form-group">
-            <label for="keySigAccidentalWidth">keySigAccidentalWidth</label>
-            <input type="text" id="keySigAccidentalWidth" class="form-control">
-          </div>
-        </div>
-        <div class="col-4">
-          <div class="form-group">
-            <label for="tabsVisibility">tabsVisibility</label>
-            <input type="text" id="tabsVisibility" class="form-control">
-          </div>
-        </div>
-        <div class="col-4">
-          <div class="form-group">
-            <label for="staveVisibility">staveVisibility</label>
-            <input type="text" id="staveVisibility" class="form-control">
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-4">
-          <div class="form-group">
-            <label for="tabStemsVisibility">tabStemsVisibility</label>
-            <input type="text" id="tabStemsVisibility" class="form-control">
-          </div>
-        </div>
-        <div class="col-4">
-          <div class="form-group">
-            <label for="voltaHeight">voltaHeight</label>
-            <input type="text" id="voltaHeight" class="form-control">
-          </div>
-        </div>
-        <div class="col-4">
-          <div class="form-group">
-            <label for="renderWidth">renderWidth</label>
-            <input type="text" id="renderWidth" class="form-control">
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-4">
-          <div class="form-group">
-            <label for="tuning">tuning</label>
-            <select id="tuning" class="form-control">
-              <option value="GUITAR_STANDARD">Guitar (EADGBE)</option>
-              <option value="GUITAR_OPEN_D">Guitar (DADF#AD)</option>
-              <option value="BANJO">Banjo (GDGBD)</option>
-              <option value="TENOR_BANJO">Tenor Banjo (CGDA)</option>
-              <option value="FIDDLE_STANDARD">Fiddle/Mandolin (GDAE)</option>
-              <option value="FIDDLE_STANDARD_FINGERINGS">Fiddle Fingerings (GDAE)</option>
-              <option value="FIDDLE_CROSS">Cross Fiddle (AEAE)</option>
-              <option value="FIDDLE_CROSS_FINGERINGS">Fiddle Fingerings (AEAE)</option>
-              <option value="TIN_WHISTLE_D">Tin Whistle (D)</option>
-              <option value="TIN_WHISTLE_C">Tin Whistle (C)</option>
-              <option value="TIN_WHISTLE_B_FLAT">Tin Whistle (Bb)</option>
-              <option value="HARMONICA_C">Harmonica (C)</option>
-              <option value="HARMONICA_A">Harmonica (A)</option>
-              <option value="HARMONICA_G">Harmonica (G)</option>
-              <option value="HARMONICA_C_OCTAVE">Harmonica (C) +OCTAVE</option>
-              <option value="HARMONICA_A_OCTAVE">Harmonica (A) +OCTAVE</option>
-              <option value="HARMONICA_G_OCTAVE">Harmonica (G) +OCTAVE</option>
+    <div class="row">
+      <div class="col-9">
+        <div class="row">
+          <div class="col">
+            <select id="tunebookSelect" multiple>
             </select>
           </div>
+          <div class="col d-flex flex-column">
+            <select id="tuneSelect" multiple>
+            </select>
+                <div class="form-group">
+                  <label for="testForErrors"></label>
+                  <button id="testForErrors" class="btn btn-primary form-control">Test All and Show Render Errors</button>
+                </div>
+          </div>
+          <div class="col">
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="xOffset">xOffset</label>
+                  <input type="text" id="xOffset" class="form-control" placeholder="xOffset">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="xOffset">xOffset</label>
+                  <input type="text" id="xOffset" class="form-control" placeholder="xOffset">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="widthFactor">widthFactor</label>
+                  <input type="text" id="widthFactor" class="form-control">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="lineHeight">lineHeight</label>
+                  <input type="text" id="lineHeight" class="form-control">
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+        <div class="row">
+          <div class="col-4">
+            <div class="form-group">
+              <label for="clefWidth">clefWidth</label>
+              <input type="text" id="clefWidth" class="form-control">
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="form-group">
+              <label for="meterWidth">meterWidth</label>
+              <input type="text" id="meterWidth" class="form-control">
+            </div>
+          </div>
         <div class="col-4">
-          <button id="applyDefaultOptions" class="btn btn-primary">Apply Default Options</button>
+            <div class="form-group">
+              <label for="repeatWidthModifier">repeatWidthModifier</label>
+              <input type="text" id="repeatWidthModifier" class="form-control">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-4">
+            <div class="form-group">
+              <label for="keySigAccidentalWidth">keySigAccidentalWidth</label>
+              <input type="text" id="keySigAccidentalWidth" class="form-control">
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="form-group">
+              <label for="tabsVisibility">tabsVisibility</label>
+              <input type="text" id="tabsVisibility" class="form-control">
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="form-group">
+              <label for="staveVisibility">staveVisibility</label>
+              <input type="text" id="staveVisibility" class="form-control">
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-4">
+            <div class="form-group">
+              <label for="tabStemsVisibility">tabStemsVisibility</label>
+              <input type="text" id="tabStemsVisibility" class="form-control">
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="form-group">
+              <label for="voltaHeight">voltaHeight</label>
+              <input type="text" id="voltaHeight" class="form-control">
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="form-group">
+              <label for="renderWidth">renderWidth</label>
+              <input type="text" id="renderWidth" class="form-control">
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-4">
+            <div class="form-group">
+              <label for="tuning">tuning</label>
+              <select id="tuning" class="form-control">
+                <option value="GUITAR_STANDARD">Guitar (EADGBE)</option>
+                <option value="GUITAR_OPEN_D">Guitar (DADF#AD)</option>
+                <option value="BANJO">Banjo (GDGBD)</option>
+                <option value="TENOR_BANJO">Tenor Banjo (CGDA)</option>
+                <option value="FIDDLE_STANDARD">Fiddle/Mandolin (GDAE)</option>
+                <option value="FIDDLE_STANDARD_FINGERINGS">Fiddle Fingerings (GDAE)</option>
+                <option value="FIDDLE_CROSS">Cross Fiddle (AEAE)</option>
+                <option value="FIDDLE_CROSS_FINGERINGS">Fiddle Fingerings (AEAE)</option>
+                <option value="TIN_WHISTLE_D">Tin Whistle (D)</option>
+                <option value="TIN_WHISTLE_C">Tin Whistle (C)</option>
+                <option value="TIN_WHISTLE_B_FLAT">Tin Whistle (Bb)</option>
+                <option value="HARMONICA_C">Harmonica (C)</option>
+                <option value="HARMONICA_A">Harmonica (A)</option>
+                <option value="HARMONICA_G">Harmonica (G)</option>
+                <option value="HARMONICA_C_OCTAVE">Harmonica (C) +OCTAVE</option>
+                <option value="HARMONICA_A_OCTAVE">Harmonica (A) +OCTAVE</option>
+                <option value="HARMONICA_G_OCTAVE">Harmonica (G) +OCTAVE</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-4 d-flex align-items-end">
+            <button id="applyDefaultOptions" class="btn btn-primary">Apply Default Options</button>
+          </div>
         </div>
       </div>
+      <div class="col-3" id="infoContainer">
+        <p id="abcText">
+        </p>
+        <p id="errorText">
+        </p>
+      </div>
     </div>
-    <div class="col-3">
-      <p id="abcText">
-      </p>
-      <p id="errorText">
-      </p>
-    </div>
+    <div id="outputs" class="row">
+      <div id="vexflowOutput" class="col">
+        <h3>abcjs-vexflow-renderer rendered:</h3>
+        <div id="vexflowRendered">
+        </div>
+      </div>
+      <div id="abcjsOutput" class="col">
+        <h3>abcjs rendered:</h3>
+        <div id="abcjsRendered">
+        </div>
+      </div>
+    </div>  
   </div>
-  <div id="outputs" class="row">
-    <div id="vexflowOutput" class="col">
-      <h3>abcjs-vexflow-renderer rendered:</h3>
-      <div id="vexflowRendered">
-      </div>
-    </div>
-    <div id="abcjsOutput" class="col">
-      <h3>abcjs rendered:</h3>
-      <div id="abcjsRendered">
-      </div>
-    </div>
-  </div>  
 </body>
 </html>
