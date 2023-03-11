@@ -177,14 +177,10 @@ function renderTune() {
   });
 
   // render abcjs
-  ABCJS.renderAbc('abcjsRendered', abc);
+  ABCJS.renderAbc('abcjsRendered', abc, { responsive: 'resize' });
   while ($('#vexflowRendered')[0].firstChild) {
     $('#vexflowRendered')[0].removeChild($('#vexflowRendered')[0].firstChild);
   }
-
-  const abcjsSvg = document.querySelector('#abcjsRendered svg');
-  abcjsSvg.setAttribute('viewBox', '0 0 762 200');
-  abcjsSvg.setAttribute('preserveAspectRatio', 'xMidYMin meet');
 
   // render abcjs-vexflow-renderer
   const renderer = new Vex.Flow.Renderer($('#vexflowRendered')[0], Vex.Flow.Renderer.Backends.SVG);
