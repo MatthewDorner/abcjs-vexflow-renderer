@@ -1,0 +1,48 @@
+X:1
+T:Treble clef
+M:8/4
+L:1/4
+K:C treble
+G8
+
+X:2
+T:Bass clef
+M:8/4
+L:1/4
+K:C bass
+G8
+
+X:3
+T:Baritone clef
+M:8/4
+L:1/4
+K:C bass3
+G8
+
+X:4
+T:Tenor clef
+M:8/4
+L:1/4
+K:C tenor
+G8
+
+X:5
+T:Alto clef
+M:8/4
+L:1/4
+K:C alto
+G8
+
+X:6
+T:Messosoprano clef
+M:8/4
+L:1/4
+K:C alto2
+G8
+
+X:7
+T:Soprano clef
+M:8/4
+L:1/4
+K:C alto1
+G8

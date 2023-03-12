@@ -22,6 +22,8 @@ import TestDecorations from '../visual-test-cases/decorations.abc';
 import TestDurations from '../visual-test-cases/durations.abc';
 import TestCurves from '../visual-test-cases/curves.abc';
 import TestGrace from '../visual-test-cases/grace.abc';
+import TestClefs from '../visual-test-cases/clefs.abc';
+import TestVoices from '../visual-test-cases/voices.abc';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../index.css';
@@ -33,6 +35,8 @@ const tunebookFiles = {
   'Durations Test': TestDurations,
   'Curves Test': TestCurves,
   'Grace Test': TestGrace,
+  'Clefs Test': TestClefs,
+  'Voices Test': TestVoices,
   'Custom file at visual-tool/tunes.txt': CustomTunes
 };
 
