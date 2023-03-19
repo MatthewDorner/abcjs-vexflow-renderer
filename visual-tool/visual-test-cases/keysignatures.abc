@@ -1,0 +1,17 @@
+X:1
+T:C
+M:8/4
+L:1/4
+K:C treble
+G8
+
+X:2
+T:Change Key Sig
+M:8/4
+L:1/4
+K:A
+[K:G]        |    "G"CDE FGA | Bcd efg | \
+[K:Bb]       |   "Bb"CDE FGA | Bcd efg | \
+[K:Dm]       |   "Dm"CDE FGA | Bcd efg | \
+[K:F#m]      |  "F#m"CDE FGA | Bcd efg | \
+

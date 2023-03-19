@@ -47,3 +47,11 @@
 #infoContainer {
   background-color: silver;
 }
+
+html {
+  font-size: 12px;
+}
+
+#applyDefaultOptions {
+  width: 100%;
+}

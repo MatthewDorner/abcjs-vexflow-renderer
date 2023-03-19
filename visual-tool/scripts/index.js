@@ -24,6 +24,7 @@ import TestCurves from '../visual-test-cases/curves.abc';
 import TestGrace from '../visual-test-cases/grace.abc';
 import TestClefs from '../visual-test-cases/clefs.abc';
 import TestVoices from '../visual-test-cases/voices.abc';
+import TestKeySignatures from '../visual-test-cases/keysignatures.abc';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../index.css';
@@ -37,6 +38,7 @@ const tunebookFiles = {
   'Grace Test': TestGrace,
   'Clefs Test': TestClefs,
   'Voices Test': TestVoices,
+  'Key Signatures Test': TestKeySignatures,
   'Custom file at visual-tool/tunes.txt': CustomTunes
 };
 
@@ -78,7 +80,14 @@ $('#tunebookSelect')[0].onchange = (event) => {
     $('#tuneSelect')[0].removeChild($('#tuneSelect')[0].firstChild);
   }
 
-  const tunebookOptions = getTunebookOptions(tunebookFiles[event.target.value]);
+  console.log(tunebookFiles[event.target.value]);
+
+  let tunebookOptions = [];
+  if (tunebookFiles[event.target.value]) {
+    tunebookOptions = getTunebookOptions(tunebookFiles[event.target.value]);
+  }
+
+  console.log(tunebookOptions);
 
   tunebookOptions.forEach((option) => {
     $('#tuneSelect')[0].add(option);

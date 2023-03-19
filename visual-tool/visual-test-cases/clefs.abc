@@ -46,3 +46,12 @@ M:8/4
 L:1/4
 K:C alto1
 G8
+
+X:8
+T:Change Clefs
+M:8/4
+L:1/4
+K:A
+[K:G treble]        |    "G"CDE FGA | Bcd efg | \
+[K:Bb bass]       |   "Bb"CDE FGA | Bcd efg | \
+[K:Dm alto]       |   "Dm"CDE FGA | Bcd efg | \
